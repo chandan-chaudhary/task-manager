@@ -1,0 +1,49 @@
+### Variables
+@baseUrl = http://localhost:8080/api
+@contentType = application/json
+@authToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJja2NAZ21haWwuY29tIiwiaWF0IjoxNzY1OTg3MjgwLCJleHAiOjE3NjY1OTIwODB9.0wutSDAEkQgaJA78761o4TyWyqKgeA4iuRG7i6-FHZU
+
+### Get All Users
+GET {{baseUrl}}/users
+Authorization: Bearer {{authToken}}
+
+### Get User by ID
+@userId = 2
+GET {{baseUrl}}/users/{{userId}}
+Authorization: Bearer {{authToken}}
+
+### Update User (own profile)
+PATCH {{baseUrl}}/users/1
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+{
+  "name": "Chandan updated"
+}
+
+### Update User - Validation Error
+PATCH {{baseUrl}}/users/1
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+{
+  "name": "J",
+  "email": "invalid-email"
+}
+
+### Update User - Unauthorized (trying to update another user)
+PATCH {{baseUrl}}/users/2
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+{
+  "name": "Hacker"
+}
+
+### Delete User (own account)
+DELETE {{baseUrl}}/users/1
+Authorization: Bearer {{authToken}}
+
+### Delete User - Unauthorized (trying to delete another user)
+DELETE {{baseUrl}}/users/2
+Authorization: Bearer {{authToken}}

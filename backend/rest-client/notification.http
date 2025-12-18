@@ -1,0 +1,57 @@
+### Variables
+@baseUrl = http://localhost:5000/api
+@contentType = application/json
+@authToken = your-jwt-token-here
+
+### Get All Notifications
+GET {{baseUrl}}/notifications
+Authorization: Bearer {{authToken}}
+
+### Get All Notifications - Filter Unread
+GET {{baseUrl}}/notifications?isRead=false
+Authorization: Bearer {{authToken}}
+
+### Get All Notifications - Filter Read
+GET {{baseUrl}}/notifications?isRead=true
+Authorization: Bearer {{authToken}}
+
+### Get Unread Notifications Count
+GET {{baseUrl}}/notifications/unread-count
+Authorization: Bearer {{authToken}}
+
+### Get Notification by ID
+@notificationId = 1
+GET {{baseUrl}}/notifications/{{notificationId}}
+Authorization: Bearer {{authToken}}
+
+### Get Notification by ID - Invalid ID
+GET {{baseUrl}}/notifications/invalid-id
+Authorization: Bearer {{authToken}}
+
+### Get Notification by ID - Not Found
+GET {{baseUrl}}/notifications/9999
+Authorization: Bearer {{authToken}}
+
+### Mark Notification as Read
+PATCH {{baseUrl}}/notifications/1/read
+Authorization: Bearer {{authToken}}
+
+### Mark Notification as Read - Not Found
+PATCH {{baseUrl}}/notifications/9999/read
+Authorization: Bearer {{authToken}}
+
+### Mark All Notifications as Read
+PATCH {{baseUrl}}/notifications/mark-all-read
+Authorization: Bearer {{authToken}}
+
+### Delete Notification
+DELETE {{baseUrl}}/notifications/1
+Authorization: Bearer {{authToken}}
+
+### Delete Notification - Not Found
+DELETE {{baseUrl}}/notifications/9999
+Authorization: Bearer {{authToken}}
+
+### Delete Notification - Unauthorized (another user's notification)
+DELETE {{baseUrl}}/notifications/10
+Authorization: Bearer {{authToken}}

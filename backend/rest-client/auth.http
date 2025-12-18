@@ -1,0 +1,60 @@
+### Variables
+@baseUrl = http://localhost:8080/api
+@contentType = application/json
+
+### Register User
+POST {{baseUrl}}/auth/register
+Content-Type: {{contentType}}
+
+{
+  "email": "amit@gmail.com",
+  "name": "Amit Kumar",
+  "password": "test123"
+}
+
+### Register User - Validation Error (short password)
+POST {{baseUrl}}/auth/register
+Content-Type: {{contentType}}
+
+{
+  "email": "test@example.com",
+  "name": "Test User",
+  "password": "123"
+}
+
+### Register User - Validation Error (invalid email)
+POST {{baseUrl}}/auth/register
+Content-Type: {{contentType}}
+
+{
+  "email": "invalid-email",
+  "name": "Test User",
+  "password": "password123"
+}
+
+### Login User
+# @name login
+POST {{baseUrl}}/auth/login
+Content-Type: {{contentType}}
+
+{
+  "email": "ckc@gmail.com",
+  "password": "test123"
+}
+
+### Login User - Invalid Credentials
+POST {{baseUrl}}/auth/login
+Content-Type: {{contentType}}
+
+{
+  "email": "john.doe@example.com",
+  "password": "wrongpassword"
+}
+
+### Get Current User (requires authentication)
+@authToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJja2NAZ21haWwuY29tIiwiaWF0IjoxNzY1OTg3MjgwLCJleHAiOjE3NjY1OTIwODB9.0wutSDAEkQgaJA78761o4TyWyqKgeA4iuRG7i6-FHZU
+GET {{baseUrl}}/auth/me
+Authorization: Bearer {{authToken}}
+
+### Get Current User - No Token
+GET {{baseUrl}}/auth/me

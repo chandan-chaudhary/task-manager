@@ -1,0 +1,89 @@
+// This is your Prisma schema file
+// Learn more: https://pris.ly/d/prisma-schema
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+// User model for authentication and task management
+model User {
+    id        Int      @id @default(autoincrement())
+    email     String   @unique
+    password  String 
+    name      String
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    // Relations
+    createdTasks  Task[]         @relation("TaskCreator")
+    assignedTasks Task[]         @relation("TaskAssignee")
+    notifications Notification[]
+
+    @@map("users")
+}
+
+// Task model with all required fields
+model Task {
+    id          Int          @id @default(autoincrement())
+    title       String       @db.VarChar(100)
+    description String       @db.Text
+    dueDate     DateTime
+    priority    TaskPriority @default(MEDIUM)
+    status      TaskStatus   @default(TODO)
+
+    // Foreign keys
+    creatorId    Int
+    assignedToId Int?
+
+    // Timestamps
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    // Relations
+    creator    User  @relation("TaskCreator", fields: [creatorId], references: [id], onDelete: Cascade)
+    assignedTo User? @relation("TaskAssignee", fields: [assignedToId], references: [id], onDelete: SetNull)
+
+    @@index([creatorId])
+    @@index([assignedToId])
+    @@index([status])
+    @@index([priority])
+    @@index([dueDate])
+    @@map("tasks")
+}
+
+// Notification model for real-time assignment alerts
+model Notification {
+    id        Int      @id @default(autoincrement())
+    userId    Int
+    taskId    Int
+    message   String
+    isRead    Boolean  @default(false)
+    createdAt DateTime @default(now())
+
+    // Relations
+    user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+    @@index([userId])
+    @@index([isRead])
+    @@map("notifications")
+}
+
+// Enums as per requirements
+enum TaskPriority {
+    LOW
+    MEDIUM
+    HIGH
+    URGENT
+}
+
+enum TaskStatus {
+    TODO
+    IN_PROGRESS
+    REVIEW
+    COMPLETED
+}

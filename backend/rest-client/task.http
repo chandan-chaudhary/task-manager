@@ -1,0 +1,163 @@
+### Variables
+@baseUrl = http://localhost:8080/api
+@contentType = application/json
+@authToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJja2NAZ21haWwuY29tIiwiaWF0IjoxNzY1OTg3MjgwLCJleHAiOjE3NjY1OTIwODB9.0wutSDAEkQgaJA78761o4TyWyqKgeA4iuRG7i6-FHZU
+
+### Get All Tasks
+GET {{baseUrl}}/tasks
+Authorization: Bearer {{authToken}}
+
+### Get All Tasks - Filter by Status
+GET {{baseUrl}}/tasks?status=TODO
+Authorization: Bearer {{authToken}}
+
+### Get All Tasks - Filter by Priority
+GET {{baseUrl}}/tasks?priority=HIGH
+Authorization: Bearer {{authToken}}
+
+### Get All Tasks - Filter by Status and Priority
+GET {{baseUrl}}/tasks?status=IN_PROGRESS&priority=URGENT
+Authorization: Bearer {{authToken}}
+
+### Get All Tasks - Filter by Assigned User
+GET {{baseUrl}}/tasks?assignedToId=2
+Authorization: Bearer {{authToken}}
+
+### Get Task by ID
+@taskId = 1
+GET {{baseUrl}}/tasks/{{taskId}}
+Authorization: Bearer {{authToken}}
+
+### Get Task by ID - Invalid ID
+GET {{baseUrl}}/tasks/invalid-id
+Authorization: Bearer {{authToken}}
+
+### Get Task by ID - Not Found
+GET {{baseUrl}}/tasks/9999
+Authorization: Bearer {{authToken}}
+
+### Create Task
+POST {{baseUrl}}/tasks
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+{
+  "title": "Complete Project Documentation",
+  "description": "Write comprehensive documentation for the task manager API including all endpoints and examples.",
+  "dueDate": "2025-12-31T23:59:59Z",
+  "priority": "HIGH",
+  "status": "TODO"
+}
+
+### Create Task - With Assignment
+POST {{baseUrl}}/tasks
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+{
+  "title": "Review Code Changes",
+  "description": "Review the pull request for the new authentication feature.",
+  "dueDate": "2025-12-20T17:00:00Z",
+  "priority": "URGENT",
+  "status": "TODO",
+  "assignedToId": 2
+}
+
+### Create Task - Validation Error (missing required fields)
+POST {{baseUrl}}/tasks
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+{
+  "title": "Incomplete Task"
+}
+
+### Create Task - Validation Error (title too long)
+POST {{baseUrl}}/tasks
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+{
+  "title": "This is a very long title that exceeds the maximum allowed length of 100 characters and should fail validation",
+  "description": "Test description",
+  "dueDate": "2025-12-31T23:59:59Z"
+}
+
+### Create Task - Validation Error (invalid date format)
+POST {{baseUrl}}/tasks
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+{
+  "title": "Invalid Date Task",
+  "description": "Task with invalid date",
+  "dueDate": "invalid-date"
+}
+
+### Update Task
+PATCH {{baseUrl}}/tasks/1
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+{
+  "status": "IN_PROGRESS",
+  "priority": "URGENT"
+}
+
+### Update Task - Change Assignment
+PATCH {{baseUrl}}/tasks/1
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+{
+  "assignedToId": 2
+}
+
+### Update Task - Complete Task
+PATCH {{baseUrl}}/tasks/1
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+{
+  "status": "COMPLETED"
+}
+
+### Update Task - Update All Fields
+PATCH {{baseUrl}}/tasks/1
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+{
+  "title": "Updated Task Title",
+  "description": "Updated task description with more details.",
+  "dueDate": "2025-12-25T18:00:00Z",
+  "priority": "MEDIUM",
+  "status": "REVIEW",
+  "assignedToId": 3
+}
+
+### Update Task - Validation Error
+PATCH {{baseUrl}}/tasks/1
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+{
+  "status": "INVALID_STATUS"
+}
+
+### Update Task - Not Found
+PATCH {{baseUrl}}/tasks/9999
+Authorization: Bearer {{authToken}}
+Content-Type: {{contentType}}
+
+{
+  "status": "COMPLETED"
+}
+
+### Delete Task
+DELETE {{baseUrl}}/tasks/1
+Authorization: Bearer {{authToken}}
+
+### Delete Task - Not Found
+DELETE {{baseUrl}}/tasks/9999
+Authorization: Bearer {{authToken}}
