@@ -2,7 +2,7 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import userRepository from "../repositories/userRepository";
 import { AppError } from "../middleware/errorHandler";
-import { RegisterDto, LoginDto } from "../dto/auth.dto";
+import { RegisterDto, LoginDto, ChangePasswordDto } from "../dto/auth.dto";
 
 export class AuthService {
   async register(data: RegisterDto) {
@@ -23,9 +23,9 @@ export class AuthService {
     });
 
     // // Generate JWT
-    // const token = this.generateToken(user.id, user.email);
+    const token = this.generateToken(user.id, user.email);
 
-    return { user };
+    return { user, token };
   }
 
   async login(data: LoginDto) {
@@ -60,6 +60,31 @@ export class AuthService {
       throw new AppError("User not found", 404);
     }
     return user;
+  }
+
+  async changePassword(userId: number, data: ChangePasswordDto) {
+    // Find user with password
+    const user = await userRepository.findByIdWithPassword(userId);
+    if (!user) {
+      throw new AppError("User not found", 404);
+    }
+
+    // Check current password
+    const isPasswordValid = await bcrypt.compare(
+      data.currentPassword,
+      user.password
+    );
+    if (!isPasswordValid) {
+      throw new AppError("Current password is incorrect", 401);
+    }
+
+    // Hash new password
+    const hashedPassword = await bcrypt.hash(data.newPassword, 10);
+
+    // Update password
+    await userRepository.update(userId, { password: hashedPassword });
+
+    return { message: "Password changed successfully" };
   }
 
   private generateToken(id: number, email: string): string {

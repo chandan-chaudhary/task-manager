@@ -1,0 +1,1382 @@
+(globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push([typeof document === "object" ? document.currentScript : undefined,
+"[project]/components/ui/sonner.tsx [app-client] (ecmascript)", ((__turbopack_context__) => {
+"use strict";
+
+__turbopack_context__.s([
+    "Toaster",
+    ()=>Toaster
+]);
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/jsx-dev-runtime.js [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2d$themes$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next-themes/dist/index.mjs [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/sonner/dist/index.mjs [app-client] (ecmascript)");
+;
+var _s = __turbopack_context__.k.signature();
+"use client";
+;
+;
+const Toaster = ({ ...props })=>{
+    _s();
+    const { theme = "system" } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2d$themes$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useTheme"])();
+    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Toaster"], {
+        theme: theme,
+        className: "toaster group",
+        toastOptions: {
+            classNames: {
+                toast: "group toast group-[.toaster]:bg-background group-[.toaster]:text-foreground group-[.toaster]:border-border group-[.toaster]:shadow-lg",
+                description: "group-[.toast]:text-muted-foreground",
+                actionButton: "group-[.toast]:bg-primary group-[.toast]:text-primary-foreground",
+                cancelButton: "group-[.toast]:bg-muted group-[.toast]:text-muted-foreground"
+            }
+        },
+        ...props
+    }, void 0, false, {
+        fileName: "[project]/components/ui/sonner.tsx",
+        lineNumber: 12,
+        columnNumber: 5
+    }, ("TURBOPACK compile-time value", void 0));
+};
+_s(Toaster, "EriOrahfenYKDCErPq+L6926Dw4=", false, function() {
+    return [
+        __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2d$themes$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useTheme"]
+    ];
+});
+_c = Toaster;
+;
+var _c;
+__turbopack_context__.k.register(_c, "Toaster");
+if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
+    __turbopack_context__.k.registerExports(__turbopack_context__.m, globalThis.$RefreshHelpers$);
+}
+}),
+"[project]/lib/utils.ts [app-client] (ecmascript)", ((__turbopack_context__) => {
+"use strict";
+
+__turbopack_context__.s([
+    "cn",
+    ()=>cn
+]);
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$clsx$2f$dist$2f$clsx$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/clsx/dist/clsx.mjs [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$tailwind$2d$merge$2f$dist$2f$bundle$2d$mjs$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/tailwind-merge/dist/bundle-mjs.mjs [app-client] (ecmascript)");
+;
+;
+function cn(...inputs) {
+    return (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$tailwind$2d$merge$2f$dist$2f$bundle$2d$mjs$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["twMerge"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$clsx$2f$dist$2f$clsx$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["clsx"])(inputs));
+}
+if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
+    __turbopack_context__.k.registerExports(__turbopack_context__.m, globalThis.$RefreshHelpers$);
+}
+}),
+"[project]/components/ui/tooltip.tsx [app-client] (ecmascript)", ((__turbopack_context__) => {
+"use strict";
+
+__turbopack_context__.s([
+    "Tooltip",
+    ()=>Tooltip,
+    "TooltipContent",
+    ()=>TooltipContent,
+    "TooltipProvider",
+    ()=>TooltipProvider,
+    "TooltipTrigger",
+    ()=>TooltipTrigger
+]);
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/jsx-dev-runtime.js [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$radix$2d$ui$2f$react$2d$tooltip$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/@radix-ui/react-tooltip/dist/index.mjs [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$utils$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/lib/utils.ts [app-client] (ecmascript)");
+"use client";
+;
+;
+;
+;
+const TooltipProvider = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$radix$2d$ui$2f$react$2d$tooltip$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Provider"];
+const Tooltip = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$radix$2d$ui$2f$react$2d$tooltip$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Root"];
+const TooltipTrigger = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$radix$2d$ui$2f$react$2d$tooltip$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Trigger"];
+const TooltipContent = /*#__PURE__*/ __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["forwardRef"](_c = ({ className, sideOffset = 4, ...props }, ref)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$radix$2d$ui$2f$react$2d$tooltip$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Portal"], {
+        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$radix$2d$ui$2f$react$2d$tooltip$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Content"], {
+            ref: ref,
+            sideOffset: sideOffset,
+            className: (0, __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$utils$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["cn"])("z-50 overflow-hidden rounded-md bg-primary px-3 py-1.5 text-xs text-primary-foreground animate-in fade-in-0 zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 origin-[--radix-tooltip-content-transform-origin]", className),
+            ...props
+        }, void 0, false, {
+            fileName: "[project]/components/ui/tooltip.tsx",
+            lineNumber: 19,
+            columnNumber: 5
+        }, ("TURBOPACK compile-time value", void 0))
+    }, void 0, false, {
+        fileName: "[project]/components/ui/tooltip.tsx",
+        lineNumber: 18,
+        columnNumber: 3
+    }, ("TURBOPACK compile-time value", void 0)));
+_c1 = TooltipContent;
+TooltipContent.displayName = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$radix$2d$ui$2f$react$2d$tooltip$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Content"].displayName;
+;
+var _c, _c1;
+__turbopack_context__.k.register(_c, "TooltipContent$React.forwardRef");
+__turbopack_context__.k.register(_c1, "TooltipContent");
+if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
+    __turbopack_context__.k.registerExports(__turbopack_context__.m, globalThis.$RefreshHelpers$);
+}
+}),
+"[project]/types/index.ts [app-client] (ecmascript)", ((__turbopack_context__) => {
+"use strict";
+
+/**
+ * Core type definitions for the Task Manager application.
+ * These types mirror the backend models for type safety across the stack.
+ */ /** Priority levels for tasks */ __turbopack_context__.s([
+    "PriorityEnum",
+    ()=>PriorityEnum,
+    "TaskStatusEnum",
+    ()=>TaskStatusEnum,
+    "getPriorityKey",
+    ()=>getPriorityKey,
+    "getTaskStatusKey",
+    ()=>getTaskStatusKey
+]);
+var TaskStatusEnum = /*#__PURE__*/ function(TaskStatusEnum) {
+    TaskStatusEnum["TODO"] = "To Do";
+    TaskStatusEnum["IN_PROGRESS"] = "In Progress";
+    TaskStatusEnum["REVIEW"] = "Review";
+    TaskStatusEnum["COMPLETED"] = "Completed";
+    return TaskStatusEnum;
+}({});
+var PriorityEnum = /*#__PURE__*/ function(PriorityEnum) {
+    PriorityEnum["LOW"] = "Low";
+    PriorityEnum["MEDIUM"] = "Medium";
+    PriorityEnum["HIGH"] = "High";
+    PriorityEnum["URGENT"] = "Urgent";
+    return PriorityEnum;
+}({});
+function getTaskStatusKey(value) {
+    return Object.keys(TaskStatusEnum).find((key)=>TaskStatusEnum[key] === value) || "TODO";
+}
+function getPriorityKey(value) {
+    return Object.keys(PriorityEnum).find((key)=>PriorityEnum[key] === value) || "MEDIUM";
+}
+if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
+    __turbopack_context__.k.registerExports(__turbopack_context__.m, globalThis.$RefreshHelpers$);
+}
+}),
+"[project]/services/api.ts [app-client] (ecmascript)", ((__turbopack_context__) => {
+"use strict";
+
+/* eslint-disable @typescript-eslint/no-explicit-any */ /* eslint-disable @typescript-eslint/no-unused-vars */ __turbopack_context__.s([
+    "authService",
+    ()=>authService,
+    "dashboardService",
+    ()=>dashboardService,
+    "notificationService",
+    ()=>notificationService,
+    "taskService",
+    ()=>taskService,
+    "userService",
+    ()=>userService
+]);
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$build$2f$polyfills$2f$process$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = /*#__PURE__*/ __turbopack_context__.i("[project]/node_modules/next/dist/build/polyfills/process.js [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$types$2f$index$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/types/index.ts [app-client] (ecmascript)");
+;
+/**
+ * API service layer for backend communication.
+ * Currently uses mock data - replace implementations with actual API calls.
+ *
+ * @example
+ * // When connecting to backend, replace:
+ * // return mockTasks;
+ * // with:
+ * // const response = await fetch(`${API_BASE_URL}/tasks`);
+ * // return response.json();
+ */ // Configure your backend URL here when connecting
+const API_BASE_URL = ("TURBOPACK compile-time value", "http://localhost:8080/api") || "http://localhost:8080/api";
+/** Create headers for API requests */ const createHeaders = ()=>{
+    return {
+        "Content-Type": "application/json"
+    };
+};
+const authService = {
+    /**
+   * Authenticate user with email and password.
+   * Backend: POST /api/auth/login
+   */ async login (credentials) {
+        try {
+            const response = await fetch(`${API_BASE_URL}/auth/login`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                credentials: "include",
+                body: JSON.stringify(credentials)
+            });
+            console.log(response);
+            const result = await response.json();
+            if (!response.ok) {
+                return {
+                    error: result.message || "Login failed"
+                };
+            }
+            const backendUser = result.data.user;
+            return {
+                data: {
+                    user: {
+                        ...backendUser,
+                        id: String(backendUser.id),
+                        avatarUrl: `https://api.dicebear.com/7.x/avataaars/svg?seed=${backendUser.name}`
+                    },
+                    token: result.data.token
+                }
+            };
+        } catch (_error) {
+            return {
+                error: "Network error. Please try again."
+            };
+        }
+    },
+    /**
+   * Register a new user account.
+   * Backend: POST /api/auth/register
+   */ async register (data) {
+        try {
+            const response = await fetch(`${API_BASE_URL}/auth/register`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                credentials: "include",
+                body: JSON.stringify({
+                    name: data.name,
+                    email: data.email,
+                    password: data.password
+                })
+            });
+            const result = await response.json();
+            if (!response.ok) {
+                return {
+                    error: result.message || "Registration failed"
+                };
+            }
+            const backendUser = result.data.user;
+            return {
+                data: {
+                    user: {
+                        ...backendUser,
+                        id: String(backendUser.id),
+                        avatarUrl: `https://api.dicebear.com/7.x/avataaars/svg?seed=${backendUser.name}`
+                    },
+                    token: result.data.token
+                }
+            };
+        } catch (_error) {
+            return {
+                error: "Network error. Please try again."
+            };
+        }
+    },
+    /**
+   * Get current authenticated user.
+   * Backend: GET /api/auth/me
+   */ async getCurrentUser () {
+        try {
+            const response = await fetch(`${API_BASE_URL}/auth/me`, {
+                headers: createHeaders(),
+                credentials: "include"
+            });
+            if (!response.ok) {
+                const error = await response.json();
+                return {
+                    error: error.message || "Failed to fetch user data"
+                };
+            }
+            const result = await response.json();
+            const backendUser = result.data.user;
+            const user = {
+                ...backendUser,
+                id: String(backendUser.id),
+                avatarUrl: `https://api.dicebear.com/7.x/avataaars/svg?seed=${backendUser.name}`
+            };
+            return {
+                data: user
+            };
+        } catch (_error) {
+            return {
+                error: "Failed to fetch user data"
+            };
+        }
+    },
+    /**
+   * Logout current user.
+   * Backend: POST /api/auth/logout
+   */ async logout () {
+        try {
+            const response = await fetch(`${API_BASE_URL}/auth/logout`, {
+                method: "POST",
+                headers: createHeaders(),
+                credentials: "include"
+            });
+            if (!response.ok) {
+                return {
+                    error: "Logout failed"
+                };
+            }
+            return {
+                message: "Logged out successfully"
+            };
+        } catch (_error) {
+            return {
+                error: "Logout failed"
+            };
+        }
+    },
+    /**
+   * Update user profile.
+   * Backend: PATCH /api/users/:id
+   */ async updateProfile (userId, data) {
+        try {
+            const response = await fetch(`${API_BASE_URL}/users/${userId}`, {
+                method: "PATCH",
+                headers: createHeaders(),
+                credentials: "include",
+                body: JSON.stringify(data)
+            });
+            if (!response.ok) {
+                const error = await response.json();
+                return {
+                    error: error.message || "Failed to update profile"
+                };
+            }
+            const result = await response.json();
+            const backendUser = result.data.user;
+            const user = {
+                ...backendUser,
+                id: String(backendUser.id),
+                avatarUrl: `https://api.dicebear.com/7.x/avataaars/svg?seed=${backendUser.name}`
+            };
+            return {
+                data: user
+            };
+        } catch (_error) {
+            return {
+                error: "Failed to update profile"
+            };
+        }
+    },
+    /**
+   * Change user password.
+   * Backend: PUT /api/auth/change-password
+   */ async changePassword (data) {
+        try {
+            const response = await fetch(`${API_BASE_URL}/auth/change-password`, {
+                method: "PUT",
+                headers: createHeaders(),
+                credentials: "include",
+                body: JSON.stringify(data)
+            });
+            if (!response.ok) {
+                const error = await response.json();
+                return {
+                    error: error.message || "Failed to change password"
+                };
+            }
+            return {
+                message: "Password changed successfully"
+            };
+        } catch (_error) {
+            return {
+                error: "Failed to change password"
+            };
+        }
+    }
+};
+const taskService = {
+    /**
+   * Get all tasks with optional filters and sorting.
+   * Backend: GET /api/tasks
+   */ async getTasks (filters, sort) {
+        try {
+            const params = new URLSearchParams();
+            // Add filters as query params (convert to backend format using enum keys)
+            if (filters) {
+                if (filters.status && filters.status !== "all") {
+                    params.append("status", (0, __TURBOPACK__imported__module__$5b$project$5d2f$types$2f$index$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getTaskStatusKey"])(filters.status));
+                }
+                if (filters.priority && filters.priority !== "all") {
+                    params.append("priority", (0, __TURBOPACK__imported__module__$5b$project$5d2f$types$2f$index$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getPriorityKey"])(filters.priority));
+                }
+                if (filters.assignedToMe) {
+                    params.append("assignedToMe", "true");
+                }
+                if (filters.createdByMe) {
+                    params.append("createdByMe", "true");
+                }
+                if (filters.overdue) {
+                    params.append("overdue", "true");
+                }
+            }
+            // Add sorting
+            if (sort) {
+                params.append("sortBy", sort.field);
+                params.append("sortOrder", sort.direction);
+            }
+            const url = `${API_BASE_URL}/tasks${params.toString() ? `?${params.toString()}` : ""}`;
+            const response = await fetch(url, {
+                headers: createHeaders(),
+                credentials: "include"
+            });
+            if (!response.ok) {
+                const error = await response.json();
+                return {
+                    error: error.message || "Failed to fetch tasks"
+                };
+            }
+            const result = await response.json();
+            const tasks = result.data.tasks.map((task)=>({
+                    ...task,
+                    id: String(task.id),
+                    status: __TURBOPACK__imported__module__$5b$project$5d2f$types$2f$index$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TaskStatusEnum"][task.status] || task.status,
+                    priority: __TURBOPACK__imported__module__$5b$project$5d2f$types$2f$index$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["PriorityEnum"][task.priority] || task.priority,
+                    creatorId: task.creatorId ? String(task.creatorId) : undefined,
+                    assignedToId: task.assignedToId ? String(task.assignedToId) : null,
+                    creator: task.creator ? {
+                        ...task.creator,
+                        id: String(task.creator.id)
+                    } : undefined,
+                    assignedTo: task.assignedTo ? {
+                        ...task.assignedTo,
+                        id: String(task.assignedTo.id)
+                    } : null
+                }));
+            return {
+                data: tasks
+            };
+        } catch (_error) {
+            return {
+                error: "Failed to fetch tasks"
+            };
+        }
+    },
+    /**
+   * Get a single task by ID.
+   * Backend: GET /api/tasks/:id
+   */ async getTask (id) {
+        try {
+            const response = await fetch(`${API_BASE_URL}/tasks/${id}`, {
+                headers: createHeaders(),
+                credentials: "include"
+            });
+            if (!response.ok) {
+                const error = await response.json();
+                return {
+                    error: error.message || "Task not found"
+                };
+            }
+            const result = await response.json();
+            const backendTask = result.data.task;
+            const task = {
+                ...backendTask,
+                id: String(backendTask.id),
+                status: __TURBOPACK__imported__module__$5b$project$5d2f$types$2f$index$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TaskStatusEnum"][backendTask.status] || backendTask.status,
+                priority: __TURBOPACK__imported__module__$5b$project$5d2f$types$2f$index$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["PriorityEnum"][backendTask.priority] || backendTask.priority,
+                creatorId: backendTask.creatorId ? String(backendTask.creatorId) : "",
+                assignedToId: backendTask.assignedToId ? String(backendTask.assignedToId) : null
+            };
+            return {
+                data: task
+            };
+        } catch (_error) {
+            return {
+                error: "Failed to fetch task"
+            };
+        }
+    },
+    /**
+   * Create a new task.
+   * Backend: POST /api/tasks
+   */ async createTask (data) {
+        try {
+            // Convert frontend format to backend format
+            const backendData = {
+                title: data.title,
+                description: data.description,
+                dueDate: data.dueDate,
+                status: (0, __TURBOPACK__imported__module__$5b$project$5d2f$types$2f$index$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getTaskStatusKey"])(data.status),
+                priority: (0, __TURBOPACK__imported__module__$5b$project$5d2f$types$2f$index$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getPriorityKey"])(data.priority),
+                assignedToId: data.assignedToId ? parseInt(data.assignedToId) : undefined
+            };
+            const response = await fetch(`${API_BASE_URL}/tasks`, {
+                method: "POST",
+                headers: createHeaders(),
+                credentials: "include",
+                body: JSON.stringify(backendData)
+            });
+            if (!response.ok) {
+                const error = await response.json();
+                return {
+                    error: error.message || "Failed to create task"
+                };
+            }
+            const result = await response.json();
+            const backendTask = result.data.task;
+            const task = {
+                ...backendTask,
+                id: String(backendTask.id),
+                status: __TURBOPACK__imported__module__$5b$project$5d2f$types$2f$index$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TaskStatusEnum"][backendTask.status] || backendTask.status,
+                priority: __TURBOPACK__imported__module__$5b$project$5d2f$types$2f$index$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["PriorityEnum"][backendTask.priority] || backendTask.priority,
+                creatorId: String(backendTask.creatorId),
+                assignedToId: backendTask.assignedToId ? String(backendTask.assignedToId) : null
+            };
+            return {
+                data: task
+            };
+        } catch (_error) {
+            return {
+                error: "Failed to create task"
+            };
+        }
+    },
+    /**
+   * Update an existing task.
+   * Backend: PATCH /api/tasks/:id
+   */ async updateTask (id, data) {
+        try {
+            // Convert frontend format to backend format
+            const backendData = {};
+            if (data.title !== undefined) backendData.title = data.title;
+            if (data.description !== undefined) backendData.description = data.description;
+            if (data.dueDate !== undefined) backendData.dueDate = data.dueDate;
+            if (data.status !== undefined) backendData.status = (0, __TURBOPACK__imported__module__$5b$project$5d2f$types$2f$index$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getTaskStatusKey"])(data.status);
+            if (data.priority !== undefined) backendData.priority = (0, __TURBOPACK__imported__module__$5b$project$5d2f$types$2f$index$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getPriorityKey"])(data.priority);
+            if (data.assignedToId !== undefined) {
+                backendData.assignedToId = data.assignedToId ? parseInt(data.assignedToId) : null;
+            }
+            const response = await fetch(`${API_BASE_URL}/tasks/${id}`, {
+                method: "PATCH",
+                headers: createHeaders(),
+                credentials: "include",
+                body: JSON.stringify(backendData)
+            });
+            if (!response.ok) {
+                const error = await response.json();
+                return {
+                    error: error.message || "Failed to update task"
+                };
+            }
+            const result = await response.json();
+            const backendTask = result.data.task;
+            const task = {
+                ...backendTask,
+                id: String(backendTask.id),
+                status: __TURBOPACK__imported__module__$5b$project$5d2f$types$2f$index$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TaskStatusEnum"][backendTask.status] || backendTask.status,
+                priority: __TURBOPACK__imported__module__$5b$project$5d2f$types$2f$index$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["PriorityEnum"][backendTask.priority] || backendTask.priority,
+                creatorId: String(backendTask.creatorId),
+                assignedToId: backendTask.assignedToId ? String(backendTask.assignedToId) : null
+            };
+            return {
+                data: task
+            };
+        } catch (_error) {
+            return {
+                error: "Failed to update task"
+            };
+        }
+    },
+    /**
+   * Delete a task.
+   * Backend: DELETE /api/tasks/:id
+   */ async deleteTask (id) {
+        try {
+            const response = await fetch(`${API_BASE_URL}/tasks/${id}`, {
+                method: "DELETE",
+                headers: createHeaders(),
+                credentials: "include"
+            });
+            if (!response.ok) {
+                const result = await response.json();
+                return {
+                    error: result.message || "Failed to delete task"
+                };
+            }
+            return {
+                message: "Task deleted successfully"
+            };
+        } catch (_error) {
+            return {
+                error: "Failed to delete task"
+            };
+        }
+    }
+};
+const userService = {
+    /**
+   * Get all users (for task assignment dropdown).
+   * Backend: GET /api/users
+   */ async getUsers () {
+        try {
+            const response = await fetch(`${API_BASE_URL}/users`, {
+                headers: createHeaders(),
+                credentials: "include"
+            });
+            if (!response.ok) {
+                const error = await response.json();
+                return {
+                    error: error.message || "Failed to fetch users"
+                };
+            }
+            const result = await response.json();
+            const users = result.data.users.map((user)=>({
+                    ...user,
+                    id: String(user.id),
+                    avatarUrl: `https://api.dicebear.com/7.x/avataaars/svg?seed=${user.name}`
+                }));
+            return {
+                data: users
+            };
+        } catch (_error) {
+            return {
+                error: "Failed to fetch users"
+            };
+        }
+    },
+    /**
+   * Get user by ID.
+   * Backend: GET /api/users/:id
+   */ async getUser (id) {
+        try {
+            const response = await fetch(`${API_BASE_URL}/users/${id}`, {
+                headers: createHeaders(),
+                credentials: "include"
+            });
+            if (!response.ok) {
+                const error = await response.json();
+                return {
+                    error: error.message || "User not found"
+                };
+            }
+            const result = await response.json();
+            const backendUser = result.data.user;
+            const user = {
+                ...backendUser,
+                id: String(backendUser.id),
+                avatarUrl: `https://api.dicebear.com/7.x/avataaars/svg?seed=${backendUser.name}`
+            };
+            return {
+                data: user
+            };
+        } catch (_error) {
+            return {
+                error: "Failed to fetch user"
+            };
+        }
+    },
+    /**
+   * Update user.
+   * Backend: PATCH /api/users/:id
+   */ async updateUser (id, data) {
+        try {
+            const response = await fetch(`${API_BASE_URL}/users/${id}`, {
+                method: "PATCH",
+                headers: createHeaders(),
+                credentials: "include",
+                body: JSON.stringify(data)
+            });
+            if (!response.ok) {
+                const error = await response.json();
+                return {
+                    error: error.message || "Failed to update user"
+                };
+            }
+            const result = await response.json();
+            const backendUser = result.data.user;
+            const user = {
+                ...backendUser,
+                id: String(backendUser.id),
+                avatarUrl: `https://api.dicebear.com/7.x/avataaars/svg?seed=${backendUser.name}`
+            };
+            return {
+                data: user
+            };
+        } catch (_error) {
+            return {
+                error: "Failed to update user"
+            };
+        }
+    },
+    /**
+   * Delete user.
+   * Backend: DELETE /api/users/:id
+   */ async deleteUser (id) {
+        try {
+            const response = await fetch(`${API_BASE_URL}/users/${id}`, {
+                method: "DELETE",
+                headers: createHeaders(),
+                credentials: "include"
+            });
+            if (!response.ok) {
+                const result = await response.json();
+                return {
+                    error: result.message || "Failed to delete user"
+                };
+            }
+            return {
+                message: "User deleted successfully"
+            };
+        } catch (_error) {
+            return {
+                error: "Failed to delete user"
+            };
+        }
+    }
+};
+const notificationService = {
+    /**
+   * Get all notifications for current user.
+   * Backend: GET /api/notifications
+   */ async getNotifications () {
+        try {
+            const response = await fetch(`${API_BASE_URL}/notifications`, {
+                headers: createHeaders(),
+                credentials: "include"
+            });
+            if (!response.ok) {
+                const error = await response.json();
+                return {
+                    error: error.message || "Failed to fetch notifications"
+                };
+            }
+            const result = await response.json();
+            const notifications = result.data.notifications.map((n)=>({
+                    ...n,
+                    id: String(n.id),
+                    userId: n.userId ? String(n.userId) : undefined,
+                    taskId: n.taskId ? String(n.taskId) : undefined,
+                    read: n.isRead
+                }));
+            return {
+                data: notifications
+            };
+        } catch (_error) {
+            return {
+                error: "Failed to fetch notifications"
+            };
+        }
+    },
+    /**
+   * Get unread notification count.
+   * Backend: GET /api/notifications/unread-count
+   */ async getUnreadCount () {
+        try {
+            const response = await fetch(`${API_BASE_URL}/notifications/unread-count`, {
+                headers: createHeaders(),
+                credentials: "include"
+            });
+            if (!response.ok) {
+                const error = await response.json();
+                return {
+                    error: error.message || "Failed to fetch unread count"
+                };
+            }
+            const result = await response.json();
+            return {
+                data: result.data
+            };
+        } catch (_error) {
+            return {
+                error: "Failed to fetch unread count"
+            };
+        }
+    },
+    /**
+   * Get notification by ID.
+   * Backend: GET /api/notifications/:id
+   */ async getNotification (id) {
+        try {
+            const response = await fetch(`${API_BASE_URL}/notifications/${id}`, {
+                headers: createHeaders(),
+                credentials: "include"
+            });
+            if (!response.ok) {
+                const error = await response.json();
+                return {
+                    error: error.message || "Notification not found"
+                };
+            }
+            const result = await response.json();
+            const n = result.data.notification;
+            const notification = {
+                ...n,
+                id: String(n.id),
+                userId: n.userId ? String(n.userId) : undefined,
+                taskId: n.taskId ? String(n.taskId) : undefined,
+                read: n.isRead
+            };
+            return {
+                data: notification
+            };
+        } catch (_error) {
+            return {
+                error: "Failed to fetch notification"
+            };
+        }
+    },
+    /**
+   * Mark notification as read.
+   * Backend: PATCH /api/notifications/:id/read
+   */ async markAsRead (id) {
+        try {
+            const response = await fetch(`${API_BASE_URL}/notifications/${id}/read`, {
+                method: "PATCH",
+                headers: createHeaders(),
+                credentials: "include"
+            });
+            if (!response.ok) {
+                const error = await response.json();
+                return {
+                    error: error.message || "Failed to mark as read"
+                };
+            }
+            const result = await response.json();
+            const n = result.data.notification;
+            const notification = {
+                ...n,
+                id: String(n.id),
+                userId: n.userId ? String(n.userId) : undefined,
+                taskId: n.taskId ? String(n.taskId) : undefined,
+                read: n.isRead
+            };
+            return {
+                data: notification
+            };
+        } catch (_error) {
+            return {
+                error: "Failed to mark notification as read"
+            };
+        }
+    },
+    /**
+   * Mark all notifications as read.
+   * Backend: PATCH /api/notifications/mark-all-read
+   */ async markAllAsRead () {
+        try {
+            const response = await fetch(`${API_BASE_URL}/notifications/mark-all-read`, {
+                method: "PATCH",
+                headers: createHeaders(),
+                credentials: "include"
+            });
+            if (!response.ok) {
+                const result = await response.json();
+                return {
+                    error: result.message || "Failed to mark all as read"
+                };
+            }
+            return {
+                message: "All notifications marked as read"
+            };
+        } catch (_error) {
+            return {
+                error: "Failed to mark all notifications as read"
+            };
+        }
+    },
+    /**
+   * Delete notification.
+   * Backend: DELETE /api/notifications/:id
+   */ async deleteNotification (id) {
+        try {
+            const response = await fetch(`${API_BASE_URL}/notifications/${id}`, {
+                method: "DELETE",
+                headers: createHeaders(),
+                credentials: "include"
+            });
+            if (!response.ok) {
+                const result = await response.json();
+                return {
+                    error: result.message || "Failed to delete notification"
+                };
+            }
+            return {
+                message: "Notification deleted successfully"
+            };
+        } catch (_error) {
+            return {
+                error: "Failed to delete notification"
+            };
+        }
+    }
+};
+const dashboardService = {
+    /**
+   * Get dashboard statistics.
+   * Backend: GET /api/tasks/stats
+   */ async getStats () {
+        try {
+            const response = await fetch(`${API_BASE_URL}/tasks/stats`, {
+                headers: createHeaders(),
+                credentials: "include"
+            });
+            if (!response.ok) {
+                const error = await response.json();
+                return {
+                    error: error.message || "Failed to fetch stats"
+                };
+            }
+            const result = await response.json();
+            return {
+                data: result.data.stats
+            };
+        } catch (_error) {
+            return {
+                error: "Failed to fetch dashboard stats"
+            };
+        }
+    }
+};
+if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
+    __turbopack_context__.k.registerExports(__turbopack_context__.m, globalThis.$RefreshHelpers$);
+}
+}),
+"[project]/context/AuthContext.tsx [app-client] (ecmascript)", ((__turbopack_context__) => {
+"use strict";
+
+__turbopack_context__.s([
+    "AuthProvider",
+    ()=>AuthProvider,
+    "useAuth",
+    ()=>useAuth
+]);
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/jsx-dev-runtime.js [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$services$2f$api$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/services/api.ts [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/sonner/dist/index.mjs [app-client] (ecmascript)");
+;
+var _s = __turbopack_context__.k.signature(), _s1 = __turbopack_context__.k.signature();
+"use client";
+;
+;
+;
+const AuthContext = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createContext"])(undefined);
+function AuthProvider({ children }) {
+    _s();
+    const [user, setUser] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null);
+    const [token, setToken] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null);
+    const [isLoading, setIsLoading] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(true);
+    // Check for existing session on mount
+    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
+        "AuthProvider.useEffect": ()=>{
+            const checkAuth = {
+                "AuthProvider.useEffect.checkAuth": async ()=>{
+                    // Try to get current user - cookie will be sent automatically
+                    const response = await __TURBOPACK__imported__module__$5b$project$5d2f$services$2f$api$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["authService"].getCurrentUser();
+                    if (response.data) {
+                        setUser(response.data);
+                    }
+                    setIsLoading(false);
+                }
+            }["AuthProvider.useEffect.checkAuth"];
+            checkAuth();
+        }
+    }["AuthProvider.useEffect"], []);
+    const login = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useCallback"])({
+        "AuthProvider.useCallback[login]": async (credentials)=>{
+            setIsLoading(true);
+            try {
+                const response = await __TURBOPACK__imported__module__$5b$project$5d2f$services$2f$api$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["authService"].login(credentials);
+                console.log(response);
+                if (response.error) {
+                    __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].error("Login failed", {
+                        description: response.error
+                    });
+                    return false;
+                }
+                if (response.data) {
+                    setUser(response.data.user);
+                    setToken(response.data.token); // Store token for Socket.io
+                    __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].success("Welcome back!", {
+                        description: `Logged in as ${response.data.user.name}`
+                    });
+                    return true;
+                }
+                return false;
+            } finally{
+                setIsLoading(false);
+            }
+        }
+    }["AuthProvider.useCallback[login]"], []);
+    const register = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useCallback"])({
+        "AuthProvider.useCallback[register]": async (data)=>{
+            setIsLoading(true);
+            try {
+                const response = await __TURBOPACK__imported__module__$5b$project$5d2f$services$2f$api$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["authService"].register(data);
+                if (response.error) {
+                    __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].error("Registration failed", {
+                        description: response.error
+                    });
+                    return false;
+                }
+                if (response.data) {
+                    setUser(response.data.user);
+                    setToken(response.data.token); // Store token for Socket.io
+                    __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].success("Account created!", {
+                        description: "Welcome to TaskFlow"
+                    });
+                    return true;
+                }
+                return false;
+            } finally{
+                setIsLoading(false);
+            }
+        }
+    }["AuthProvider.useCallback[register]"], []);
+    const logout = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useCallback"])({
+        "AuthProvider.useCallback[logout]": async ()=>{
+            await __TURBOPACK__imported__module__$5b$project$5d2f$services$2f$api$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["authService"].logout();
+            setUser(null);
+            setToken(null); // Clear token
+            __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].success("Logged out", {
+                description: "See you next time!"
+            });
+        }
+    }["AuthProvider.useCallback[logout]"], []);
+    const updateProfile = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useCallback"])({
+        "AuthProvider.useCallback[updateProfile]": async (data)=>{
+            if (!user) return false;
+            const response = await __TURBOPACK__imported__module__$5b$project$5d2f$services$2f$api$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["authService"].updateProfile(user.id, data);
+            if (response.error) {
+                __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].error("Update failed", {
+                    description: response.error
+                });
+                return false;
+            }
+            if (response.data) {
+                setUser(response.data);
+                __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].success("Profile updated", {
+                    description: "Your changes have been saved"
+                });
+                return true;
+            }
+            return false;
+        }
+    }["AuthProvider.useCallback[updateProfile]"], [
+        user
+    ]);
+    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(AuthContext.Provider, {
+        value: {
+            user,
+            token,
+            isLoading,
+            isAuthenticated: !!user,
+            login,
+            register,
+            logout,
+            updateProfile
+        },
+        children: children
+    }, void 0, false, {
+        fileName: "[project]/context/AuthContext.tsx",
+        lineNumber: 140,
+        columnNumber: 5
+    }, this);
+}
+_s(AuthProvider, "oToHfejGVWJXL7jKSALBXMRA7bA=");
+_c = AuthProvider;
+function useAuth() {
+    _s1();
+    const context = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useContext"])(AuthContext);
+    if (context === undefined) {
+        throw new Error("useAuth must be used within an AuthProvider");
+    }
+    return context;
+}
+_s1(useAuth, "b9L3QQ+jgeyIrH0NfHrJ8nn7VMU=");
+var _c;
+__turbopack_context__.k.register(_c, "AuthProvider");
+if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
+    __turbopack_context__.k.registerExports(__turbopack_context__.m, globalThis.$RefreshHelpers$);
+}
+}),
+"[project]/lib/socket.ts [app-client] (ecmascript)", ((__turbopack_context__) => {
+"use strict";
+
+__turbopack_context__.s([
+    "disconnectSocket",
+    ()=>disconnectSocket,
+    "getSocket",
+    ()=>getSocket,
+    "initializeSocket",
+    ()=>initializeSocket,
+    "socketEvents",
+    ()=>socketEvents
+]);
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$build$2f$polyfills$2f$process$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = /*#__PURE__*/ __turbopack_context__.i("[project]/node_modules/next/dist/build/polyfills/process.js [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$socket$2e$io$2d$client$2f$build$2f$esm$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__ = __turbopack_context__.i("[project]/node_modules/socket.io-client/build/esm/index.js [app-client] (ecmascript) <locals>");
+;
+let socket = null;
+const initializeSocket = (token)=>{
+    if (socket?.connected) {
+        return socket;
+    }
+    const SOCKET_URL = ("TURBOPACK compile-time value", "http://localhost:8080/api")?.replace("/api", "") || "http://localhost:8080";
+    socket = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$socket$2e$io$2d$client$2f$build$2f$esm$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__["io"])(SOCKET_URL, {
+        auth: {
+            token
+        },
+        autoConnect: true,
+        reconnection: true,
+        reconnectionDelay: 1000,
+        reconnectionDelayMax: 5000,
+        reconnectionAttempts: 5
+    });
+    // Connection event handlers
+    socket.on("connect", ()=>{
+        console.log("✅ Socket.io connected");
+    });
+    socket.on("disconnect", (reason)=>{
+        console.log("❌ Socket.io disconnected:", reason);
+    });
+    socket.on("connect_error", (error)=>{
+        console.error("Socket.io connection error:", error.message);
+    });
+    socket.on("error", (error)=>{
+        console.error("Socket.io error:", error);
+    });
+    return socket;
+};
+const getSocket = ()=>{
+    return socket;
+};
+const disconnectSocket = ()=>{
+    if (socket) {
+        socket.disconnect();
+        socket = null;
+        console.log("Socket.io disconnected manually");
+    }
+};
+const socketEvents = {
+    // Task events
+    onTaskCreated: (callback)=>{
+        socket?.on("task:created", callback);
+    },
+    onTaskUpdated: (callback)=>{
+        socket?.on("task:updated", callback);
+    },
+    onTaskDeleted: (callback)=>{
+        socket?.on("task:deleted", callback);
+    },
+    onTaskAssigned: (callback)=>{
+        socket?.on("task:assigned", callback);
+    },
+    // Notification events
+    onNotificationCreated: (callback)=>{
+        socket?.on("notification:created", callback);
+    },
+    // Cleanup
+    off: (event)=>{
+        socket?.off(event);
+    },
+    offAll: ()=>{
+        socket?.removeAllListeners();
+    }
+};
+if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
+    __turbopack_context__.k.registerExports(__turbopack_context__.m, globalThis.$RefreshHelpers$);
+}
+}),
+"[project]/context/SocketContext.tsx [app-client] (ecmascript)", ((__turbopack_context__) => {
+"use strict";
+
+__turbopack_context__.s([
+    "SocketProvider",
+    ()=>SocketProvider,
+    "useSocket",
+    ()=>useSocket
+]);
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/jsx-dev-runtime.js [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$socket$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/lib/socket.ts [app-client] (ecmascript)");
+;
+var _s = __turbopack_context__.k.signature(), _s1 = __turbopack_context__.k.signature();
+"use client";
+;
+;
+const SocketContext = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createContext"])({
+    socket: null,
+    isConnected: false
+});
+const useSocket = ()=>{
+    _s();
+    const context = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useContext"])(SocketContext);
+    if (!context) {
+        throw new Error("useSocket must be used within a SocketProvider");
+    }
+    return context;
+};
+_s(useSocket, "b9L3QQ+jgeyIrH0NfHrJ8nn7VMU=");
+function SocketProvider({ children, token }) {
+    _s1();
+    const [state, setState] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])({
+        socket: null,
+        isConnected: false
+    });
+    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
+        "SocketProvider.useEffect": ()=>{
+            // Only initialize socket if we have a token (user is authenticated)
+            if (!token) {
+                (0, __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$socket$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["disconnectSocket"])();
+                return;
+            }
+            const socketInstance = (0, __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$socket$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["initializeSocket"])(token);
+            // Listen to connection status
+            const handleConnect = {
+                "SocketProvider.useEffect.handleConnect": ()=>{
+                    setState({
+                        socket: socketInstance,
+                        isConnected: true
+                    });
+                }
+            }["SocketProvider.useEffect.handleConnect"];
+            const handleDisconnect = {
+                "SocketProvider.useEffect.handleDisconnect": ()=>{
+                    setState({
+                        socket: socketInstance,
+                        isConnected: false
+                    });
+                }
+            }["SocketProvider.useEffect.handleDisconnect"];
+            socketInstance.on("connect", handleConnect);
+            socketInstance.on("disconnect", handleDisconnect);
+            // Cleanup on unmount
+            return ({
+                "SocketProvider.useEffect": ()=>{
+                    socketInstance.off("connect", handleConnect);
+                    socketInstance.off("disconnect", handleDisconnect);
+                    (0, __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$socket$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["disconnectSocket"])();
+                }
+            })["SocketProvider.useEffect"];
+        }
+    }["SocketProvider.useEffect"], [
+        token
+    ]);
+    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(SocketContext.Provider, {
+        value: state,
+        children: children
+    }, void 0, false, {
+        fileName: "[project]/context/SocketContext.tsx",
+        lineNumber: 66,
+        columnNumber: 5
+    }, this);
+}
+_s1(SocketProvider, "NjSCbq2FCianCglE5FZJfD6T41Q=");
+_c = SocketProvider;
+var _c;
+__turbopack_context__.k.register(_c, "SocketProvider");
+if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
+    __turbopack_context__.k.registerExports(__turbopack_context__.m, globalThis.$RefreshHelpers$);
+}
+}),
+"[project]/app/providers.tsx [app-client] (ecmascript)", ((__turbopack_context__) => {
+"use strict";
+
+__turbopack_context__.s([
+    "Providers",
+    ()=>Providers
+]);
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/jsx-dev-runtime.js [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$sonner$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/components/ui/sonner.tsx [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$tooltip$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/components/ui/tooltip.tsx [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$tanstack$2f$query$2d$core$2f$build$2f$modern$2f$queryClient$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/@tanstack/query-core/build/modern/queryClient.js [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$tanstack$2f$react$2d$query$2f$build$2f$modern$2f$QueryClientProvider$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/@tanstack/react-query/build/modern/QueryClientProvider.js [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$context$2f$AuthContext$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/context/AuthContext.tsx [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$context$2f$SocketContext$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/context/SocketContext.tsx [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2d$themes$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next-themes/dist/index.mjs [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
+;
+var _s = __turbopack_context__.k.signature(), _s1 = __turbopack_context__.k.signature();
+"use client";
+;
+;
+;
+;
+;
+;
+;
+function SocketWrapper({ children }) {
+    _s();
+    const { token } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$context$2f$AuthContext$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useAuth"])();
+    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$context$2f$SocketContext$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["SocketProvider"], {
+        token: token || undefined,
+        children: children
+    }, void 0, false, {
+        fileName: "[project]/app/providers.tsx",
+        lineNumber: 13,
+        columnNumber: 10
+    }, this);
+}
+_s(SocketWrapper, "ZpOvj47KCDv4EW5BIUHQHDAsr3M=", false, function() {
+    return [
+        __TURBOPACK__imported__module__$5b$project$5d2f$context$2f$AuthContext$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useAuth"]
+    ];
+});
+_c = SocketWrapper;
+function Providers({ children }) {
+    _s1();
+    const [queryClient] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])({
+        "Providers.useState": ()=>new __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$tanstack$2f$query$2d$core$2f$build$2f$modern$2f$queryClient$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["QueryClient"]({
+                defaultOptions: {
+                    queries: {
+                        refetchOnWindowFocus: false,
+                        retry: 1
+                    }
+                }
+            })
+    }["Providers.useState"]);
+    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2d$themes$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["ThemeProvider"], {
+        attribute: "class",
+        defaultTheme: "system",
+        enableSystem: true,
+        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$tanstack$2f$react$2d$query$2f$build$2f$modern$2f$QueryClientProvider$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["QueryClientProvider"], {
+            client: queryClient,
+            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$context$2f$AuthContext$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["AuthProvider"], {
+                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(SocketWrapper, {
+                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$tooltip$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["TooltipProvider"], {
+                        children: [
+                            children,
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$sonner$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Toaster"], {}, void 0, false, {
+                                fileName: "[project]/app/providers.tsx",
+                                lineNumber: 36,
+                                columnNumber: 15
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "[project]/app/providers.tsx",
+                        lineNumber: 34,
+                        columnNumber: 13
+                    }, this)
+                }, void 0, false, {
+                    fileName: "[project]/app/providers.tsx",
+                    lineNumber: 33,
+                    columnNumber: 11
+                }, this)
+            }, void 0, false, {
+                fileName: "[project]/app/providers.tsx",
+                lineNumber: 32,
+                columnNumber: 9
+            }, this)
+        }, void 0, false, {
+            fileName: "[project]/app/providers.tsx",
+            lineNumber: 31,
+            columnNumber: 7
+        }, this)
+    }, void 0, false, {
+        fileName: "[project]/app/providers.tsx",
+        lineNumber: 30,
+        columnNumber: 5
+    }, this);
+}
+_s1(Providers, "K/o2p34zk2NrS8govH65MkAdu90=");
+_c1 = Providers;
+var _c, _c1;
+__turbopack_context__.k.register(_c, "SocketWrapper");
+__turbopack_context__.k.register(_c1, "Providers");
+if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
+    __turbopack_context__.k.registerExports(__turbopack_context__.m, globalThis.$RefreshHelpers$);
+}
+}),
+]);
+
+//# sourceMappingURL=_07f46cdb._.js.map

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { AppLayout } from "@/app/_components/layout";
 import {
   TaskCard,
@@ -10,6 +10,7 @@ import {
 import { TaskListSkeleton } from "@/components/ui/skeletons";
 import { useTasks, useDeleteTask } from "@/hooks/useTasks";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { ProtectedRoute } from "@/app/_components/auth/ProtectedRoute";
 import {
   AlertDialog,
@@ -21,7 +22,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
-import { Plus, Inbox } from "lucide-react";
+import { Plus, Inbox, Search } from "lucide-react";
 import type { Task, TaskFilters, TaskSort } from "@/types";
 
 export default function TasksPage() {
@@ -33,12 +34,26 @@ export default function TasksPage() {
     field: "dueDate",
     direction: "asc",
   });
+  const [searchQuery, setSearchQuery] = useState("");
   const [formOpen, setFormOpen] = useState(false);
   const [editingTask, setEditingTask] = useState<Task | null>(null);
   const [deleteTaskId, setDeleteTaskId] = useState<string | null>(null);
 
-  const { data: tasks, isLoading } = useTasks(filters, sort);
+  const { data: allTasks, isLoading } = useTasks(filters, sort);
   const deleteTask = useDeleteTask();
+
+  // Filter tasks by search query on the frontend
+  const tasks = useMemo(() => {
+    if (!allTasks || !searchQuery.trim()) return allTasks;
+    const query = searchQuery.toLowerCase();
+    return allTasks.filter(
+      (task) =>
+        task.title.toLowerCase().includes(query) ||
+        task.description.toLowerCase().includes(query) ||
+        task.assignedTo?.name.toLowerCase().includes(query) ||
+        task.creator?.name.toLowerCase().includes(query)
+    );
+  }, [allTasks, searchQuery]);
 
   const handleEdit = (task: Task) => {
     setEditingTask(task);
@@ -63,6 +78,17 @@ export default function TasksPage() {
     <ProtectedRoute>
       <AppLayout title="Tasks" subtitle="Manage and track your team's work">
         <div className="space-y-6 animate-fade-in">
+          {/* Search Bar */}
+          <div className="relative max-w-md">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+            <Input
+              placeholder="Search tasks by title, description, or assignee..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="pl-9 bg-secondary/50 border-border"
+            />
+          </div>
+
           {/* Header Actions */}
           <div className="flex items-center justify-between">
             <TaskFiltersBar

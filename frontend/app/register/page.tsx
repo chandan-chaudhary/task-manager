@@ -23,6 +23,7 @@ import { useEffect } from "react";
 
 export default function RegisterPage() {
   const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const { register: registerUser, isLoading, isAuthenticated } = useAuth();
   const router = useRouter();
 
@@ -41,6 +42,8 @@ export default function RegisterPage() {
   });
 
   const onSubmit = async (data: RegisterFormData) => {
+    console.log(data);
+
     const success = await registerUser({
       name: data.name,
       email: data.email,
@@ -139,6 +142,41 @@ export default function RegisterPage() {
               {errors.password && (
                 <p className="text-sm text-destructive">
                   {errors.password.message}
+                </p>
+              )}
+              <p className="text-xs text-muted-foreground">
+                At least 6 characters with uppercase, lowercase, and number
+              </p>
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="confirmPassword" className="text-sm font-medium">
+                Confirm Password
+              </Label>
+              <div className="relative">
+                <Input
+                  id="confirmPassword"
+                  type={showConfirmPassword ? "text" : "password"}
+                  placeholder="Confirm your password"
+                  disabled={isLoading}
+                  className="h-11 pr-10"
+                  {...register("confirmPassword")}
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  {showConfirmPassword ? (
+                    <EyeOff className="h-4 w-4" />
+                  ) : (
+                    <Eye className="h-4 w-4" />
+                  )}
+                </button>
+              </div>
+              {errors.confirmPassword && (
+                <p className="text-sm text-destructive">
+                  {errors.confirmPassword.message}
                 </p>
               )}
             </div>

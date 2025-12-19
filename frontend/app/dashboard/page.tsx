@@ -71,6 +71,8 @@ export default function DashboardPage() {
   const { data: myTasks, isLoading: tasksLoading } = useTasks({
     assignedToMe: true,
   });
+  console.log(myTasks);
+  
   const { data: createdTasks } = useTasks({ createdByMe: true });
   const { data: overdueTasks } = useTasks({ overdue: true });
   const deleteTask = useDeleteTask();

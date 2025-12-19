@@ -1,7 +1,6 @@
 import { useState } from "react";
 import {
   Bell,
-  Search,
   LogOut,
   Settings as SettingsIcon,
   LayoutDashboard,
@@ -25,11 +24,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from "@/components/ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import {
   useNotifications,
@@ -46,7 +41,6 @@ interface HeaderProps {
 }
 
 export function Header({ title, subtitle }: HeaderProps) {
-  const [searchOpen, setSearchOpen] = useState(false);
   const { data: notifications } = useNotifications();
   const markAllRead = useMarkAllNotificationsRead();
   const { user, logout } = useAuth();
@@ -134,42 +128,6 @@ export function Header({ title, subtitle }: HeaderProps) {
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
-
-          {/* Search - Desktop only */}
-          <div
-            className={cn(
-              "hidden md:flex items-center transition-all duration-300",
-              searchOpen ? "w-64" : "w-10"
-            )}
-          >
-            {searchOpen ? (
-              <div className="relative w-full">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                <Input
-                  placeholder="Search tasks..."
-                  className="pl-9 pr-9 bg-secondary/50 border-border"
-                  autoFocus
-                  onBlur={() => setSearchOpen(false)}
-                />
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="absolute right-0 top-0 h-full"
-                  onClick={() => setSearchOpen(false)}
-                >
-                  <X size={16} />
-                </Button>
-              </div>
-            ) : (
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={() => setSearchOpen(true)}
-              >
-                <Search size={20} />
-              </Button>
-            )}
-          </div>
 
           {/* Notifications */}
           <Popover>

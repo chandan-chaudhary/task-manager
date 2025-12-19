@@ -4,6 +4,7 @@ import userRepository from "../repositories/userRepository";
 import { AppError } from "../middleware/errorHandler";
 import { CreateTaskDto, UpdateTaskDto, GetTasksQuery } from "../dto/task.dto";
 import { TaskStatus, TaskPriority } from "@prisma/client";
+import { socketEvents } from "../config/socket";
 
 export class TaskService {
   async getAllTasks(filters?: GetTasksQuery, userId?: number) {
@@ -21,6 +22,17 @@ export class TaskService {
     // Overdue filter requires userId
     if (filters?.overdue && userId) {
       taskFilters.overdue = true;
+      taskFilters.userId = userId;
+    }
+
+    // Default behavior: show only tasks created by or assigned to the user
+    // If no specific filters are set, show all user-related tasks
+    if (
+      userId &&
+      !filters?.createdByMe &&
+      !filters?.assignedToMe &&
+      !filters?.assignedToId
+    ) {
       taskFilters.userId = userId;
     }
 
@@ -62,12 +74,19 @@ export class TaskService {
 
     // Create notification if task is assigned to someone other than creator
     if (data.assignedToId && data.assignedToId !== creatorId) {
-      await notificationRepository.create({
+      const notification = await notificationRepository.create({
         user: { connect: { id: data.assignedToId } },
         taskId: task.id,
         message: `You have been assigned a new task: ${task.title}`,
       });
+
+      // Emit real-time notification
+      socketEvents.notificationCreated(data.assignedToId, notification);
+      socketEvents.taskAssigned(data.assignedToId, task);
     }
+
+    // Emit task creation event to all clients
+    socketEvents.taskCreated(task);
 
     return task;
   }
@@ -85,6 +104,8 @@ export class TaskService {
 
     // If user is only assignee (not creator), they can only update status
     if (isAssignee && !isCreator) {
+      console.log(isAssignee, isCreator, data);
+
       // Only allow status updates
       if (Object.keys(data).some((key) => key !== "status")) {
         throw new AppError(
@@ -95,6 +116,26 @@ export class TaskService {
 
       if (data.status) {
         const task = await taskRepository.update(id, { status: data.status });
+
+        // Notify creator about status update
+        if (existingTask.creatorId !== userId) {
+          const statusName = data.status.replace("_", " ").toLowerCase();
+          const notification = await notificationRepository.create({
+            user: { connect: { id: existingTask.creatorId } },
+            taskId: task.id,
+            message: `Status of "${task.title}" was updated to ${statusName}`,
+          });
+
+          // Emit real-time notification
+          socketEvents.notificationCreated(
+            existingTask.creatorId,
+            notification
+          );
+        }
+
+        // Emit real-time update
+        socketEvents.taskUpdated(id, task);
+
         return task;
       }
 
@@ -136,12 +177,37 @@ export class TaskService {
       data.assignedToId !== existingTask.assignedToId &&
       data.assignedToId !== null
     ) {
-      await notificationRepository.create({
+      const notification = await notificationRepository.create({
         user: { connect: { id: data.assignedToId } },
         taskId: task.id,
         message: `You have been assigned to task: ${task.title}`,
       });
+
+      // Emit real-time notification
+      socketEvents.notificationCreated(data.assignedToId, notification);
+      socketEvents.taskAssigned(data.assignedToId, task);
     }
+
+    // Create notification if status changed and there's an assignee
+    if (
+      data.status &&
+      data.status !== existingTask.status &&
+      existingTask.assignedToId &&
+      existingTask.assignedToId !== userId
+    ) {
+      const statusName = data.status.replace("_", " ");
+      const notification = await notificationRepository.create({
+        user: { connect: { id: existingTask.assignedToId } },
+        taskId: task.id,
+        message: `Status of "${task.title}" was updated to ${statusName}`,
+      });
+
+      // Emit real-time notification
+      socketEvents.notificationCreated(existingTask.assignedToId, notification);
+    }
+
+    // Emit task update event to all clients
+    socketEvents.taskUpdated(id, task);
 
     return task;
   }
@@ -153,6 +219,9 @@ export class TaskService {
     }
 
     await taskRepository.delete(id);
+
+    // Emit task deletion event to all clients
+    socketEvents.taskDeleted(id);
   }
 
   async getStats(userId: number) {

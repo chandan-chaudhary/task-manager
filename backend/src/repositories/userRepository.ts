@@ -21,6 +21,12 @@ export class UserRepository {
     });
   }
 
+  async findByIdWithPassword(id: number) {
+    return prisma.user.findUnique({
+      where: { id },
+    });
+  }
+
   async findByIdWithTasks(id: number) {
     return prisma.user.findUnique({
       where: { id },

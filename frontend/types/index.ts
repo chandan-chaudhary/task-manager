@@ -145,6 +145,7 @@ export interface TaskFilters {
   assignedToMe?: boolean;
   createdByMe?: boolean;
   overdue?: boolean;
+  search?: string;
 }
 
 /**

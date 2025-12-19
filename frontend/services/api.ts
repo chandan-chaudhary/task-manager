@@ -78,7 +78,7 @@ export const authService = {
             id: String(backendUser.id),
             avatarUrl: `https://api.dicebear.com/7.x/avataaars/svg?seed=${backendUser.name}`,
           },
-          token: "", // Token is now in HttpOnly cookie
+          token: result.data.token, // Get token from response
         },
       };
     } catch (_error) {
@@ -119,7 +119,7 @@ export const authService = {
             id: String(backendUser.id),
             avatarUrl: `https://api.dicebear.com/7.x/avataaars/svg?seed=${backendUser.name}`,
           },
-          token: "", // Token is now in HttpOnly cookie
+          token: result.data.token, // Get token from response
         },
       };
     } catch (_error) {
@@ -209,6 +209,33 @@ export const authService = {
       return { data: user };
     } catch (_error) {
       return { error: "Failed to update profile" };
+    }
+  },
+
+  /**
+   * Change user password.
+   * Backend: PUT /api/auth/change-password
+   */
+  async changePassword(data: {
+    currentPassword: string;
+    newPassword: string;
+  }): Promise<ApiResponse<void>> {
+    try {
+      const response = await fetch(`${API_BASE_URL}/auth/change-password`, {
+        method: "PUT",
+        headers: createHeaders(),
+        credentials: "include",
+        body: JSON.stringify(data),
+      });
+
+      if (!response.ok) {
+        const error = await response.json();
+        return { error: error.message || "Failed to change password" };
+      }
+
+      return { message: "Password changed successfully" };
+    } catch (_error) {
+      return { error: "Failed to change password" };
     }
   },
 };

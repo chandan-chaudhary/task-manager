@@ -7,6 +7,9 @@ import type {
   UpdateTaskDto,
 } from "@/types";
 import { toast } from "sonner";
+import { useEffect } from "react";
+import { socketEvents } from "@/lib/socket";
+import { useSocket } from "@/context/SocketContext";
 
 /**
  * Custom hook for managing tasks with React Query.
@@ -16,7 +19,10 @@ import { toast } from "sonner";
 const TASKS_KEY = ["tasks"];
 
 export function useTasks(filters?: TaskFilters, sort?: TaskSort) {
-  return useQuery({
+  const queryClient = useQueryClient();
+  const { isConnected } = useSocket();
+
+  const query = useQuery({
     queryKey: [...TASKS_KEY, filters, sort],
     queryFn: async () => {
       const response = await taskService.getTasks(filters, sort);
@@ -25,6 +31,45 @@ export function useTasks(filters?: TaskFilters, sort?: TaskSort) {
     },
     staleTime: 30000, // 30 seconds
   });
+
+  // Listen for real-time task updates
+  useEffect(() => {
+    if (!isConnected) return;
+
+    // Handle task created
+    socketEvents.onTaskCreated((data) => {
+      console.log("Real-time: Task created", data.task);
+      queryClient.invalidateQueries({ queryKey: TASKS_KEY });
+    });
+
+    // Handle task updated
+    socketEvents.onTaskUpdated((data) => {
+      console.log("Real-time: Task updated", data.taskId, data.task);
+      queryClient.invalidateQueries({ queryKey: TASKS_KEY });
+    });
+
+    // Handle task deleted
+    socketEvents.onTaskDeleted((data) => {
+      console.log("Real-time: Task deleted", data.taskId);
+      queryClient.invalidateQueries({ queryKey: TASKS_KEY });
+    });
+
+    // Handle task assigned
+    socketEvents.onTaskAssigned((data) => {
+      console.log("Real-time: Task assigned", data.task);
+      queryClient.invalidateQueries({ queryKey: TASKS_KEY });
+    });
+
+    // Cleanup listeners on unmount
+    return () => {
+      socketEvents.off("task:created");
+      socketEvents.off("task:updated");
+      socketEvents.off("task:deleted");
+      socketEvents.off("task:assigned");
+    };
+  }, [isConnected, queryClient]);
+
+  return query;
 }
 
 export function useTask(id: string) {

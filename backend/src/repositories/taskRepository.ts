@@ -28,6 +28,13 @@ export class TaskRepository {
         { creatorId: filters.userId },
       ];
     }
+    // Default filter: show only tasks created by or assigned to the user
+    else if (filters?.userId && !filters?.assignedToId && !filters?.creatorId) {
+      where.OR = [
+        { assignedToId: filters.userId },
+        { creatorId: filters.userId },
+      ];
+    }
 
     return prisma.task.findMany({
       where,

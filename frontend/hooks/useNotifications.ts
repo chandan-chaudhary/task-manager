@@ -1,5 +1,9 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { notificationService } from "@/services/api";
+import { useEffect } from "react";
+import { socketEvents } from "@/lib/socket";
+import { useSocket } from "@/context/SocketContext";
+import { toast } from "sonner";
 
 /**
  * Custom hook for managing notifications with React Query.
@@ -8,7 +12,10 @@ import { notificationService } from "@/services/api";
 const NOTIFICATIONS_KEY = ["notifications"];
 
 export function useNotifications() {
-  return useQuery({
+  const queryClient = useQueryClient();
+  const { isConnected } = useSocket();
+
+  const query = useQuery({
     queryKey: NOTIFICATIONS_KEY,
     queryFn: async () => {
       const response = await notificationService.getNotifications();
@@ -17,6 +24,43 @@ export function useNotifications() {
     },
     refetchInterval: 30000, // Refetch every 30 seconds
   });
+
+  // Listen for real-time notifications
+  useEffect(() => {
+    if (!isConnected) return;
+
+    // Handle new notification
+    socketEvents.onNotificationCreated((data) => {
+      console.log("Real-time: Notification received", data.notification);
+      queryClient.invalidateQueries({ queryKey: NOTIFICATIONS_KEY });
+
+      const notification = data.notification as { message: string };
+      // Show toast notification
+      toast.info("New Notification", {
+        description: notification.message,
+      });
+    });
+
+    // Handle task assignment notification
+    socketEvents.onTaskAssigned((data) => {
+      console.log("Real-time: Task assigned to you", data.task);
+      queryClient.invalidateQueries({ queryKey: NOTIFICATIONS_KEY });
+
+      const task = data.task as { title: string };
+      // Show prominent toast for task assignment
+      toast.success("New Task Assigned!", {
+        description: `You have been assigned: ${task.title}`,
+        duration: 5000,
+      });
+    });
+
+    return () => {
+      socketEvents.off("notification:created");
+      socketEvents.off("task:assigned");
+    };
+  }, [isConnected, queryClient]);
+
+  return query;
 }
 
 export function useMarkNotificationRead() {

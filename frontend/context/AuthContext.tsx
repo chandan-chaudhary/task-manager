@@ -15,6 +15,7 @@ interface AuthContextType {
   user: User | null;
   isLoading: boolean;
   isAuthenticated: boolean;
+  token: string | null;
   login: (credentials: LoginCredentials) => Promise<boolean>;
   register: (data: RegisterData) => Promise<boolean>;
   logout: () => Promise<void>;
@@ -25,6 +26,7 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
+  const [token, setToken] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   // Check for existing session on mount
@@ -57,6 +59,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
         if (response.data) {
           setUser(response.data.user);
+          setToken(response.data.token); // Store token for Socket.io
           toast.success("Welcome back!", {
             description: `Logged in as ${response.data.user.name}`,
           });
@@ -85,6 +88,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
       if (response.data) {
         setUser(response.data.user);
+        setToken(response.data.token); // Store token for Socket.io
         toast.success("Account created!", {
           description: "Welcome to TaskFlow",
         });
@@ -100,6 +104,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const logout = useCallback(async () => {
     await authService.logout();
     setUser(null);
+    setToken(null); // Clear token
     toast.success("Logged out", {
       description: "See you next time!",
     });
@@ -135,6 +140,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     <AuthContext.Provider
       value={{
         user,
+        token,
         isLoading,
         isAuthenticated: !!user,
         login,

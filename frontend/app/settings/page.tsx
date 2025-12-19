@@ -4,10 +4,6 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AppLayout } from "@/app/_components/layout";
 import { useAuth } from "@/context/AuthContext";
-import {
-  updateProfileSchema,
-  type UpdateProfileFormData,
-} from "@/lib/validation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -21,30 +17,86 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Separator } from "@/components/ui/separator";
 import { ProtectedRoute } from "@/app/_components/auth/ProtectedRoute";
-import { Loader2, User, Bell, Shield, Palette } from "lucide-react";
+import { Loader2, User, Shield } from "lucide-react";
 import { useState } from "react";
-import { Switch } from "@/components/ui/switch";
+import { authService } from "@/services/api";
+import { toast } from "sonner";
+import { z } from "zod";
+
+const updateProfileSchema = z.object({
+  name: z
+    .string()
+    .min(2, "Name must be at least 2 characters")
+    .max(50, "Name must be less than 50 characters"),
+});
+
+const changePasswordSchema = z
+  .object({
+    currentPassword: z.string().min(1, "Current password is required"),
+    newPassword: z
+      .string()
+      .min(6, "Password must be at least 6 characters")
+      .regex(/[A-Z]/, "Password must contain at least one uppercase letter")
+      .regex(/[a-z]/, "Password must contain at least one lowercase letter")
+      .regex(/[0-9]/, "Password must contain at least one number"),
+    confirmPassword: z.string(),
+  })
+  .refine((data) => data.newPassword === data.confirmPassword, {
+    message: "Passwords don't match",
+    path: ["confirmPassword"],
+  });
+
+type UpdateProfileFormData = z.infer<typeof updateProfileSchema>;
+type ChangePasswordFormData = z.infer<typeof changePasswordSchema>;
 
 export default function SettingsPage() {
   const { user, updateProfile } = useAuth();
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmittingProfile, setIsSubmittingProfile] = useState(false);
+  const [isSubmittingPassword, setIsSubmittingPassword] = useState(false);
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<UpdateProfileFormData>({
+  const profileForm = useForm<UpdateProfileFormData>({
     resolver: zodResolver(updateProfileSchema),
     defaultValues: {
       name: user?.name || "",
-      avatarUrl: user?.avatarUrl || "",
     },
   });
 
-  const onSubmit = async (data: UpdateProfileFormData) => {
-    setIsSubmitting(true);
+  const passwordForm = useForm<ChangePasswordFormData>({
+    resolver: zodResolver(changePasswordSchema),
+    defaultValues: {
+      currentPassword: "",
+      newPassword: "",
+      confirmPassword: "",
+    },
+  });
+
+  const onProfileSubmit = async (data: UpdateProfileFormData) => {
+    setIsSubmittingProfile(true);
     await updateProfile(data);
-    setIsSubmitting(false);
+    setIsSubmittingProfile(false);
+  };
+
+  const onPasswordSubmit = async (data: ChangePasswordFormData) => {
+    setIsSubmittingPassword(true);
+    try {
+      const response = await authService.changePassword({
+        currentPassword: data.currentPassword,
+        newPassword: data.newPassword,
+      });
+
+      if (response.error) {
+        toast.error("Failed to change password", {
+          description: response.error,
+        });
+      } else {
+        toast.success("Password changed successfully");
+        passwordForm.reset();
+      }
+    } catch {
+      toast.error("Failed to change password");
+    } finally {
+      setIsSubmittingPassword(false);
+    }
   };
 
   return (
@@ -63,7 +115,10 @@ export default function SettingsPage() {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+              <form
+                onSubmit={profileForm.handleSubmit(onProfileSubmit)}
+                className="space-y-6"
+              >
                 {/* Avatar Preview */}
                 <div className="flex items-center gap-4">
                   <Avatar className="h-20 w-20 border-2 border-border">
@@ -87,37 +142,23 @@ export default function SettingsPage() {
                     <Label htmlFor="name">Display Name</Label>
                     <Input
                       id="name"
-                      {...register("name")}
-                      className={errors.name ? "border-destructive" : ""}
+                      {...profileForm.register("name")}
+                      className={
+                        profileForm.formState.errors.name
+                          ? "border-destructive"
+                          : ""
+                      }
                     />
-                    {errors.name && (
+                    {profileForm.formState.errors.name && (
                       <p className="text-xs text-destructive">
-                        {errors.name.message}
+                        {profileForm.formState.errors.name.message}
                       </p>
                     )}
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="avatarUrl">Avatar URL</Label>
-                    <Input
-                      id="avatarUrl"
-                      placeholder="https://example.com/avatar.jpg"
-                      {...register("avatarUrl")}
-                      className={errors.avatarUrl ? "border-destructive" : ""}
-                    />
-                    {errors.avatarUrl && (
-                      <p className="text-xs text-destructive">
-                        {errors.avatarUrl.message}
-                      </p>
-                    )}
-                    <p className="text-xs text-muted-foreground">
-                      Leave empty to use a generated avatar
-                    </p>
                   </div>
                 </div>
 
-                <Button type="submit" disabled={isSubmitting}>
-                  {isSubmitting && (
+                <Button type="submit" disabled={isSubmittingProfile}>
+                  {isSubmittingProfile && (
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                   )}
                   Save Changes
@@ -126,106 +167,89 @@ export default function SettingsPage() {
             </CardContent>
           </Card>
 
-          {/* Notification Settings */}
-          <Card className="bg-card border-border">
-            <CardHeader>
-              <div className="flex items-center gap-2">
-                <Bell className="h-5 w-5 text-primary" />
-                <CardTitle>Notifications</CardTitle>
-              </div>
-              <CardDescription>
-                Configure how you receive notifications
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="flex items-center justify-between">
-                <div className="space-y-0.5">
-                  <Label>Task Assignments</Label>
-                  <p className="text-sm text-muted-foreground">
-                    Receive notifications when a task is assigned to you
-                  </p>
-                </div>
-                <Switch defaultChecked />
-              </div>
-              <Separator />
-              <div className="flex items-center justify-between">
-                <div className="space-y-0.5">
-                  <Label>Task Updates</Label>
-                  <p className="text-sm text-muted-foreground">
-                    Receive notifications when tasks you are involved in are
-                    updated
-                  </p>
-                </div>
-                <Switch defaultChecked />
-              </div>
-              <Separator />
-              <div className="flex items-center justify-between">
-                <div className="space-y-0.5">
-                  <Label>Due Date Reminders</Label>
-                  <p className="text-sm text-muted-foreground">
-                    Get reminded before tasks are due
-                  </p>
-                </div>
-                <Switch defaultChecked />
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* Appearance (placeholder) */}
-          <Card className="bg-card border-border">
-            <CardHeader>
-              <div className="flex items-center gap-2">
-                <Palette className="h-5 w-5 text-primary" />
-                <CardTitle>Appearance</CardTitle>
-              </div>
-              <CardDescription>Customize the look and feel</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="flex items-center justify-between">
-                <div className="space-y-0.5">
-                  <Label>Dark Mode</Label>
-                  <p className="text-sm text-muted-foreground">
-                    Use dark theme for the interface
-                  </p>
-                </div>
-                <Switch defaultChecked />
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* Security (placeholder) */}
+          {/* Change Password */}
           <Card className="bg-card border-border">
             <CardHeader>
               <div className="flex items-center gap-2">
                 <Shield className="h-5 w-5 text-primary" />
-                <CardTitle>Security</CardTitle>
+                <CardTitle>Change Password</CardTitle>
               </div>
-              <CardDescription>Manage your account security</CardDescription>
+              <CardDescription>
+                Update your password regularly for better security
+              </CardDescription>
             </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="flex items-center justify-between">
-                <div className="space-y-0.5">
-                  <Label>Two-Factor Authentication</Label>
-                  <p className="text-sm text-muted-foreground">
-                    Add an extra layer of security to your account
+            <CardContent>
+              <form
+                onSubmit={passwordForm.handleSubmit(onPasswordSubmit)}
+                className="space-y-4"
+              >
+                <div className="space-y-2">
+                  <Label htmlFor="currentPassword">Current Password</Label>
+                  <Input
+                    id="currentPassword"
+                    type="password"
+                    {...passwordForm.register("currentPassword")}
+                    className={
+                      passwordForm.formState.errors.currentPassword
+                        ? "border-destructive"
+                        : ""
+                    }
+                  />
+                  {passwordForm.formState.errors.currentPassword && (
+                    <p className="text-xs text-destructive">
+                      {passwordForm.formState.errors.currentPassword.message}
+                    </p>
+                  )}
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="newPassword">New Password</Label>
+                  <Input
+                    id="newPassword"
+                    type="password"
+                    {...passwordForm.register("newPassword")}
+                    className={
+                      passwordForm.formState.errors.newPassword
+                        ? "border-destructive"
+                        : ""
+                    }
+                  />
+                  {passwordForm.formState.errors.newPassword && (
+                    <p className="text-xs text-destructive">
+                      {passwordForm.formState.errors.newPassword.message}
+                    </p>
+                  )}
+                  <p className="text-xs text-muted-foreground">
+                    At least 6 characters with uppercase, lowercase, and number
                   </p>
                 </div>
-                <Button variant="outline" size="sm">
-                  Enable
-                </Button>
-              </div>
-              <Separator />
-              <div className="flex items-center justify-between">
-                <div className="space-y-0.5">
-                  <Label>Change Password</Label>
-                  <p className="text-sm text-muted-foreground">
-                    Update your password regularly for better security
-                  </p>
+
+                <div className="space-y-2">
+                  <Label htmlFor="confirmPassword">Confirm New Password</Label>
+                  <Input
+                    id="confirmPassword"
+                    type="password"
+                    {...passwordForm.register("confirmPassword")}
+                    className={
+                      passwordForm.formState.errors.confirmPassword
+                        ? "border-destructive"
+                        : ""
+                    }
+                  />
+                  {passwordForm.formState.errors.confirmPassword && (
+                    <p className="text-xs text-destructive">
+                      {passwordForm.formState.errors.confirmPassword.message}
+                    </p>
+                  )}
                 </div>
-                <Button variant="outline" size="sm">
-                  Update
+
+                <Button type="submit" disabled={isSubmittingPassword}>
+                  {isSubmittingPassword && (
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  )}
+                  Change Password
                 </Button>
-              </div>
+              </form>
             </CardContent>
           </Card>
         </div>

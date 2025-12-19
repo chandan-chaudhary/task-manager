@@ -142,16 +142,23 @@ export function TaskFormDialog({
           : data.dueDate.toISOString();
 
       if (isEditing && task) {
+        // If user is only assignee (not creator), only send status update
+        const updateData = canOnlyUpdateStatus
+          ? {
+              status: data.status,
+            }
+          : {
+              title: data.title,
+              description: data.description,
+              dueDate: dueDateISO,
+              priority: data.priority,
+              status: data.status,
+              assignedToId: data.assignedToId ?? null,
+            };
+
         await updateTask.mutateAsync({
           id: task.id,
-          data: {
-            title: data.title,
-            description: data.description,
-            dueDate: dueDateISO,
-            priority: data.priority,
-            status: data.status,
-            assignedToId: data.assignedToId ?? null,
-          },
+          data: updateData,
         });
       } else {
         await createTask.mutateAsync({

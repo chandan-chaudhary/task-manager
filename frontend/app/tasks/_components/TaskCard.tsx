@@ -12,11 +12,7 @@ import {
 } from "lucide-react";
 import type { Task } from "@/types";
 import { PriorityBadge, StatusBadge } from "@/components/ui/badges";
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from "@/components/ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -26,6 +22,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
+import { useAuth } from "@/context/AuthContext";
 
 interface TaskCardProps {
   task: Task;
@@ -55,10 +52,11 @@ function formatDueDate(date: string): { text: string; className: string } {
   };
 }
 
-
 export function TaskCard({ task, onEdit, onDelete }: TaskCardProps) {
+  const { user } = useAuth();
   const dueInfo = formatDueDate(task.dueDate);
   const isCompleted = task.status === "Completed";
+  const isCreator = user?.id === task.creatorId;
 
   return (
     <div
@@ -111,14 +109,18 @@ export function TaskCard({ task, onEdit, onDelete }: TaskCardProps) {
                 <Pencil size={14} />
                 Edit task
               </DropdownMenuItem>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem
-                onClick={() => onDelete?.(task.id)}
-                className="flex items-center gap-2 text-destructive focus:text-destructive"
-              >
-                <Trash2 size={14} />
-                Delete task
-              </DropdownMenuItem>
+              {isCreator && (
+                <>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem
+                    onClick={() => onDelete?.(task.id)}
+                    className="flex items-center gap-2 text-destructive focus:text-destructive"
+                  >
+                    <Trash2 size={14} />
+                    Delete task
+                  </DropdownMenuItem>
+                </>
+              )}
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
