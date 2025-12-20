@@ -16,12 +16,10 @@ export class UserService {
   }
 
   async updateUser(id: number, data: UpdateUserDto, requestingUserId: number) {
-    // Check if user trying to update their own profile
     if (requestingUserId !== id) {
       throw new AppError("You are not authorized to update this user", 403);
     }
 
-    // Check if email is already taken by another user
     if (data.email) {
       const existingUser = await userRepository.findByEmail(data.email);
       if (existingUser && existingUser.id !== id) {

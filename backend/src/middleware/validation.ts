@@ -11,7 +11,6 @@ export const validate = (schema: AnyZodObject) => {
         params: req.params,
       });
 
-      // Replace req with validated data
       req.body = validated.body || req.body;
       req.query = validated.query || req.query;
       req.params = validated.params || req.params;

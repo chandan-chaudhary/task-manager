@@ -5,9 +5,6 @@ import { socketEvents } from "@/lib/socket";
 import { useSocket } from "@/context/SocketContext";
 import { toast } from "sonner";
 
-/**
- * Custom hook for managing notifications with React Query.
- */
 
 const NOTIFICATIONS_KEY = ["notifications"];
 
@@ -22,32 +19,28 @@ export function useNotifications() {
       if (response.error) throw new Error(response.error);
       return response.data!;
     },
-    refetchInterval: 30000, // Refetch every 30 seconds
+    refetchInterval: 30000,
   });
 
   // Listen for real-time notifications
   useEffect(() => {
     if (!isConnected) return;
 
-    // Handle new notification
     socketEvents.onNotificationCreated((data) => {
       console.log("Real-time: Notification received", data.notification);
       queryClient.invalidateQueries({ queryKey: NOTIFICATIONS_KEY });
 
       const notification = data.notification as { message: string };
-      // Show toast notification
       toast.info("New Notification", {
         description: notification.message,
       });
     });
 
-    // Handle task assignment notification
     socketEvents.onTaskAssigned((data) => {
       console.log("Real-time: Task assigned to you", data.task);
       queryClient.invalidateQueries({ queryKey: NOTIFICATIONS_KEY });
 
       const task = data.task as { title: string };
-      // Show prominent toast for task assignment
       toast.success("New Task Assigned!", {
         description: `You have been assigned: ${task.title}`,
         duration: 5000,

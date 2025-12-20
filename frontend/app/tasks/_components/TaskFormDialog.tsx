@@ -135,7 +135,6 @@ export function TaskFormDialog({
 
   const onSubmit = async (data: CreateTaskFormData) => {
     try {
-      // Convert Date to ISO string format for backend
       const dueDateISO =
         typeof data.dueDate === "string"
           ? new Date(data.dueDate).toISOString()

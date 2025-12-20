@@ -20,38 +20,19 @@ import {
   getPriorityKey,
 } from "@/types";
 
-/**
- * API service layer for backend communication.
- * Currently uses mock data - replace implementations with actual API calls.
- *
- * @example
- * // When connecting to backend, replace:
- * // return mockTasks;
- * // with:
- * // const response = await fetch(`${API_BASE_URL}/tasks`);
- * // return response.json();
- */
 
-// Configure your backend URL here when connecting
 const API_BASE_URL =
-  process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080/api";
+  process.env.NEXT_PUBLIC_API_URL as string;
 
-/** Create headers for API requests */
 const createHeaders = (): HeadersInit => {
   return {
     "Content-Type": "application/json",
   };
 };
 
-// ============================================
-// AUTH SERVICE
-// ============================================
 
 export const authService = {
-  /**
-   * Authenticate user with email and password.
-   * Backend: POST /api/auth/login
-   */
+ 
   async login(
     credentials: LoginCredentials
   ): Promise<ApiResponse<{ user: User; token: string }>> {
@@ -59,7 +40,7 @@ export const authService = {
       const response = await fetch(`${API_BASE_URL}/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        credentials: "include", // Include cookies in request
+        credentials: "include", 
         body: JSON.stringify(credentials),
       });
       console.log(response);
@@ -78,7 +59,7 @@ export const authService = {
             id: String(backendUser.id),
             avatarUrl: `https://api.dicebear.com/7.x/avataaars/svg?seed=${backendUser.name}`,
           },
-          token: result.data.token, // Get token from response
+          token: result.data.token,
         },
       };
     } catch (_error) {
@@ -86,10 +67,7 @@ export const authService = {
     }
   },
 
-  /**
-   * Register a new user account.
-   * Backend: POST /api/auth/register
-   */
+
   async register(
     data: RegisterData
   ): Promise<ApiResponse<{ user: User; token: string }>> {
@@ -97,7 +75,7 @@ export const authService = {
       const response = await fetch(`${API_BASE_URL}/auth/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        credentials: "include", // Include cookies in request
+        credentials: "include",
         body: JSON.stringify({
           name: data.name,
           email: data.email,
@@ -127,15 +105,12 @@ export const authService = {
     }
   },
 
-  /**
-   * Get current authenticated user.
-   * Backend: GET /api/auth/me
-   */
+
   async getCurrentUser(): Promise<ApiResponse<User>> {
     try {
       const response = await fetch(`${API_BASE_URL}/auth/me`, {
         headers: createHeaders(),
-        credentials: "include", // Include cookies in request
+        credentials: "include",
       });
 
       if (!response.ok) {
@@ -156,16 +131,13 @@ export const authService = {
     }
   },
 
-  /**
-   * Logout current user.
-   * Backend: POST /api/auth/logout
-   */
+
   async logout(): Promise<ApiResponse<void>> {
     try {
       const response = await fetch(`${API_BASE_URL}/auth/logout`, {
         method: "POST",
         headers: createHeaders(),
-        credentials: "include", // Include cookies in request
+        credentials: "include", 
       });
 
       if (!response.ok) {
@@ -178,10 +150,7 @@ export const authService = {
     }
   },
 
-  /**
-   * Update user profile.
-   * Backend: PATCH /api/users/:id
-   */
+
   async updateProfile(
     userId: string,
     data: Partial<User>
@@ -212,10 +181,7 @@ export const authService = {
     }
   },
 
-  /**
-   * Change user password.
-   * Backend: PUT /api/auth/change-password
-   */
+
   async changePassword(data: {
     currentPassword: string;
     newPassword: string;
@@ -240,15 +206,8 @@ export const authService = {
   },
 };
 
-// ============================================
-// TASK SERVICE
-// ============================================
-
 export const taskService = {
-  /**
-   * Get all tasks with optional filters and sorting.
-   * Backend: GET /api/tasks
-   */
+
   async getTasks(
     filters?: TaskFilters,
     sort?: TaskSort
@@ -319,10 +278,6 @@ export const taskService = {
     }
   },
 
-  /**
-   * Get a single task by ID.
-   * Backend: GET /api/tasks/:id
-   */
   async getTask(id: string): Promise<ApiResponse<Task>> {
     try {
       const response = await fetch(`${API_BASE_URL}/tasks/${id}`, {
@@ -357,10 +312,6 @@ export const taskService = {
     }
   },
 
-  /**
-   * Create a new task.
-   * Backend: POST /api/tasks
-   */
   async createTask(data: CreateTaskDto): Promise<ApiResponse<Task>> {
     try {
       // Convert frontend format to backend format
@@ -408,10 +359,6 @@ export const taskService = {
     }
   },
 
-  /**
-   * Update an existing task.
-   * Backend: PATCH /api/tasks/:id
-   */
   async updateTask(
     id: string,
     data: UpdateTaskDto
@@ -467,10 +414,7 @@ export const taskService = {
     }
   },
 
-  /**
-   * Delete a task.
-   * Backend: DELETE /api/tasks/:id
-   */
+ 
   async deleteTask(id: string): Promise<ApiResponse<void>> {
     try {
       const response = await fetch(`${API_BASE_URL}/tasks/${id}`, {
@@ -491,15 +435,9 @@ export const taskService = {
   },
 };
 
-// ============================================
-// USER SERVICE
-// ============================================
 
 export const userService = {
-  /**
-   * Get all users (for task assignment dropdown).
-   * Backend: GET /api/users
-   */
+
   async getUsers(): Promise<ApiResponse<User[]>> {
     try {
       const response = await fetch(`${API_BASE_URL}/users`, {
@@ -524,10 +462,6 @@ export const userService = {
     }
   },
 
-  /**
-   * Get user by ID.
-   * Backend: GET /api/users/:id
-   */
   async getUser(id: string): Promise<ApiResponse<User>> {
     try {
       const response = await fetch(`${API_BASE_URL}/users/${id}`, {
@@ -553,10 +487,6 @@ export const userService = {
     }
   },
 
-  /**
-   * Update user.
-   * Backend: PATCH /api/users/:id
-   */
   async updateUser(
     id: string,
     data: Partial<User>
@@ -587,10 +517,7 @@ export const userService = {
     }
   },
 
-  /**
-   * Delete user.
-   * Backend: DELETE /api/users/:id
-   */
+
   async deleteUser(id: string): Promise<ApiResponse<void>> {
     try {
       const response = await fetch(`${API_BASE_URL}/users/${id}`, {
@@ -611,15 +538,8 @@ export const userService = {
   },
 };
 
-// ============================================
-// NOTIFICATION SERVICE
-// ============================================
-
 export const notificationService = {
-  /**
-   * Get all notifications for current user.
-   * Backend: GET /api/notifications
-   */
+
   async getNotifications(): Promise<ApiResponse<Notification[]>> {
     try {
       const response = await fetch(`${API_BASE_URL}/notifications`, {
@@ -646,10 +566,7 @@ export const notificationService = {
     }
   },
 
-  /**
-   * Get unread notification count.
-   * Backend: GET /api/notifications/unread-count
-   */
+
   async getUnreadCount(): Promise<ApiResponse<{ count: number }>> {
     try {
       const response = await fetch(
@@ -672,10 +589,6 @@ export const notificationService = {
     }
   },
 
-  /**
-   * Get notification by ID.
-   * Backend: GET /api/notifications/:id
-   */
   async getNotification(id: string): Promise<ApiResponse<Notification>> {
     try {
       const response = await fetch(`${API_BASE_URL}/notifications/${id}`, {
@@ -703,10 +616,7 @@ export const notificationService = {
     }
   },
 
-  /**
-   * Mark notification as read.
-   * Backend: PATCH /api/notifications/:id/read
-   */
+
   async markAsRead(id: string): Promise<ApiResponse<Notification>> {
     try {
       const response = await fetch(`${API_BASE_URL}/notifications/${id}/read`, {
@@ -735,10 +645,6 @@ export const notificationService = {
     }
   },
 
-  /**
-   * Mark all notifications as read.
-   * Backend: PATCH /api/notifications/mark-all-read
-   */
   async markAllAsRead(): Promise<ApiResponse<void>> {
     try {
       const response = await fetch(
@@ -761,10 +667,7 @@ export const notificationService = {
     }
   },
 
-  /**
-   * Delete notification.
-   * Backend: DELETE /api/notifications/:id
-   */
+
   async deleteNotification(id: string): Promise<ApiResponse<void>> {
     try {
       const response = await fetch(`${API_BASE_URL}/notifications/${id}`, {
@@ -785,15 +688,9 @@ export const notificationService = {
   },
 };
 
-// ============================================
-// DASHBOARD SERVICE
-// ============================================
 
 export const dashboardService = {
-  /**
-   * Get dashboard statistics.
-   * Backend: GET /api/tasks/stats
-   */
+  
   async getStats(): Promise<ApiResponse<DashboardStats>> {
     try {
       const response = await fetch(`${API_BASE_URL}/tasks/stats`, {

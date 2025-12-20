@@ -1,10 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { userService } from "@/services/api";
 
-/**
- * Custom hook for fetching users (used for task assignment).
- */
-
 export function useUsers() {
   return useQuery({
     queryKey: ["users"],

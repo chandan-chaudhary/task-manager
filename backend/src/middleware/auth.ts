@@ -17,7 +17,6 @@ export const authMiddleware = async (
   next: NextFunction
 ) => {
   try {
-    // Read token from HttpOnly cookie
     const token = req.cookies?.token;
 
     if (!token) {

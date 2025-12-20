@@ -7,7 +7,7 @@ export interface TaskFilters {
   assignedToId?: number;
   creatorId?: number;
   overdue?: boolean;
-  userId?: number; // For overdue filter to check both assigned and created
+  userId?: number;
 }
 
 export class TaskRepository {

@@ -4,9 +4,7 @@ import { useEffect } from "react";
 import { socketEvents } from "@/lib/socket";
 import { useSocket } from "@/context/SocketContext";
 
-/**
- * Custom hook for fetching dashboard statistics.
- */
+// Custom hook for fetching dashboard statistics.
 
 export function useDashboardStats() {
   const queryClient = useQueryClient();

@@ -2,17 +2,13 @@ import { io, Socket } from "socket.io-client";
 
 let socket: Socket | null = null;
 
-/**
- * Initialize Socket.io connection with authentication token
- */
 export const initializeSocket = (token: string): Socket => {
   if (socket?.connected) {
     return socket;
   }
 
   const SOCKET_URL =
-    process.env.NEXT_PUBLIC_API_URL?.replace("/api", "") ||
-    "http://localhost:8080";
+    process.env.NEXT_PUBLIC_API_URL?.replace("/api", "");
 
   socket = io(SOCKET_URL, {
     auth: {
@@ -45,16 +41,12 @@ export const initializeSocket = (token: string): Socket => {
   return socket;
 };
 
-/**
- * Get the current socket instance
- */
+
 export const getSocket = (): Socket | null => {
   return socket;
 };
 
-/**
- * Disconnect socket connection
- */
+
 export const disconnectSocket = (): void => {
   if (socket) {
     socket.disconnect();
@@ -63,9 +55,6 @@ export const disconnectSocket = (): void => {
   }
 };
 
-/**
- * Socket event listeners setup
- */
 export const socketEvents = {
   // Task events
   onTaskCreated: (callback: (data: { task: unknown }) => void) => {
@@ -93,7 +82,6 @@ export const socketEvents = {
     socket?.on("notification:created", callback);
   },
 
-  // Cleanup
   off: (event: string) => {
     socket?.off(event);
   },

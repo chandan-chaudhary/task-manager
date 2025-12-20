@@ -11,10 +11,6 @@ import { useEffect } from "react";
 import { socketEvents } from "@/lib/socket";
 import { useSocket } from "@/context/SocketContext";
 
-/**
- * Custom hook for managing tasks with React Query.
- * Provides caching, optimistic updates, and automatic refetching.
- */
 
 const TASKS_KEY = ["tasks"];
 

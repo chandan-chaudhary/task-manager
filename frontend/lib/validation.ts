@@ -1,10 +1,5 @@
 import { z } from "zod";
 
-/**
- * Zod validation schemas for form validation and API data integrity.
- * These schemas ensure data consistency between frontend and backend.
- */
-
 /** Password requirements */
 const passwordSchema = z
   .string()

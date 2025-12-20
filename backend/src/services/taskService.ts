@@ -25,8 +25,6 @@ export class TaskService {
       taskFilters.userId = userId;
     }
 
-    // Default behavior: show only tasks created by or assigned to the user
-    // If no specific filters are set, show all user-related tasks
     if (
       userId &&
       !filters?.createdByMe &&
@@ -142,13 +140,10 @@ export class TaskService {
       throw new AppError("No valid updates provided", 400);
     }
 
-    // If user is not creator and not assignee, deny access
     if (!isCreator && !isAssignee) {
       throw new AppError("You don't have permission to update this task", 403);
     }
 
-    // Creator can update everything
-    // Validate assignedTo user exists if provided
     if (data.assignedToId) {
       const assignedUser = await userRepository.findById(data.assignedToId);
       if (!assignedUser) {
@@ -183,12 +178,10 @@ export class TaskService {
         message: `You have been assigned to task: ${task.title}`,
       });
 
-      // Emit real-time notification
       socketEvents.notificationCreated(data.assignedToId, notification);
       socketEvents.taskAssigned(data.assignedToId, task);
     }
 
-    // Create notification if status changed and there's an assignee
     if (
       data.status &&
       data.status !== existingTask.status &&
@@ -202,11 +195,9 @@ export class TaskService {
         message: `Status of "${task.title}" was updated to ${statusName}`,
       });
 
-      // Emit real-time notification
       socketEvents.notificationCreated(existingTask.assignedToId, notification);
     }
 
-    // Emit task update event to all clients
     socketEvents.taskUpdated(id, task);
 
     return task;
@@ -220,12 +211,10 @@ export class TaskService {
 
     await taskRepository.delete(id);
 
-    // Emit task deletion event to all clients
     socketEvents.taskDeleted(id);
   }
 
   async getStats(userId: number) {
-    // Get only tasks that are assigned to or created by the logged-in user
     const allTasks = await taskRepository.findAll({});
     const userTasks = allTasks.filter(
       (t) => t.assignedToId === userId || t.creatorId === userId
