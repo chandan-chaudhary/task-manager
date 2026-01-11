@@ -9,6 +9,14 @@ export default {
     "./src/**/*.{ts,tsx}",
   ],
   theme: {
+    screens: {
+      xs: "320px",
+      sm: "420px",
+      md: "768px",
+      lg: "1024px",
+      xl: "1280px",
+      "2xl": "1536px",
+    },
     extend: {
       fontFamily: {
         sans: ["var(--font-sans)", "Inter", "system-ui", "sans-serif"],

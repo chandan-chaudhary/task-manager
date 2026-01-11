@@ -83,7 +83,7 @@ export function Sidebar() {
       {/* Header */}
       <div className="flex items-center justify-between p-4 border-b border-sidebar-border">
         {!isCollapsed && (
-          <Link href="/dashboard" className="flex items-center gap-2">
+          <Link href="/" className="flex items-center gap-2">
             <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
               <Zap className="w-5 h-5 text-primary-foreground" />
             </div>

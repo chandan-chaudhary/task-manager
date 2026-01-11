@@ -34,6 +34,7 @@ import { useAuth } from "@/context/AuthContext";
 import { cn } from "@/lib/utils";
 import { formatDistanceToNow } from "date-fns";
 import { useRouter, usePathname } from "next/navigation";
+import { UserProfileDropdown } from "./UserProfileDropdown";
 
 interface HeaderProps {
   title: string;
@@ -192,43 +193,9 @@ export function Header({ title, subtitle }: HeaderProps) {
           </Popover>
 
           {/* Desktop User Profile Dropdown */}
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button
-                variant="ghost"
-                size="icon"
-                className="relative hidden md:flex"
-              >
-                <Avatar className="h-8 w-8">
-                  <AvatarImage src={user?.avatarUrl} alt={user?.name} />
-                  <AvatarFallback className="bg-primary/10 text-primary text-xs">
-                    {user?.name?.charAt(0).toUpperCase()}
-                  </AvatarFallback>
-                </Avatar>
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="w-56">
-              <DropdownMenuLabel>
-                <div className="flex flex-col space-y-1">
-                  <p className="text-sm font-medium">{user?.name}</p>
-                  <p className="text-xs text-muted-foreground">{user?.email}</p>
-                </div>
-              </DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem onClick={() => router.push("/settings")}>
-                <SettingsIcon className="mr-2 h-4 w-4" />
-                Settings
-              </DropdownMenuItem>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem
-                onClick={logout}
-                className="text-destructive focus:text-destructive focus:bg-destructive/10"
-              >
-                <LogOut className="mr-2 h-4 w-4" />
-                Logout
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+          <div className="hidden md:block">
+            <UserProfileDropdown buttonClassName="h-8 w-8" />
+          </div>
         </div>
       </div>
     </header>
