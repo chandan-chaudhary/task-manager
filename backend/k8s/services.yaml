@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata: # <--  Metadata for the service
+  name: backend-service # <--  Name of the service
+  labels: # <--  Labels for the service
+    app: task-manager-api # <--  Labels for the service
+spec: # <--  Defines the desired state for the service
+  ports: # <--  Ports for the service
+  - port: 8080 # <--  Port for the service
+    targetPort: 8080 # <--  Target port for the service
+    protocol: TCP # <--  Protocol for the service
+    # nodePort: 30080
+  selector: # <--  Selects the pods managed by this service
+    app: task-manager-api
+  type: NodePort # <--  Type of the service

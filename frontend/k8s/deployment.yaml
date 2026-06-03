@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment # Deployment specifies the desired state for the frontend
+metadata: # Metadata for the deployment
+  name: task-manager-frontend # Name of the deployment
+  labels: # Labels for the deployment
+    app: task-manager-frontend # Labels for the deployment
+spec: # Specifies the desired state for the frontend
+  replicas: 2 # Number of replicas for high availability
+  selector: # Selects the pods managed by this deployment
+    matchLabels:
+      app: task-manager-frontend # Labels for the pods
+  template: # Template for the pods
+    metadata:
+      labels: 
+        app: task-manager-frontend # Labels for the pods
+    spec:
+      containers: # Containers for the pods
+      - name: task-manager-frontend # Name of the container
+        image: debian476/frontend-server:latest # Image for the container
+        ports:
+        - containerPort: 3000 # Port for the container
+        envFrom:  # Inject environment variables from secrets
+        - secretRef:
+            name: frontend-secrets
+        env:
+        - name: POD_NAME # Downward API to inject physical POD_NAME into the frontend
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+              
+        livenessProbe: # <--  Auto-restarts container if app crashes/freezes
+          httpGet:
+            path: /
+            port: 8080
+          initialDelaySeconds: 15
+          periodSeconds: 20
+
+        readinessProbe: # <--  Waits until container starts before sending traffic
+          httpGet:
+            path: /
+            port: 8080
+          initialDelaySeconds: 5
+          periodSeconds: 10
+
+        resources:
+          limits:
+            cpu: "500m" # CPU limits for the container
+            memory: "512Mi" # Memory limits for the container
+          requests:
+            cpu: "100m" # CPU requests for the container
+            memory: "128Mi" # Memory requests for the container

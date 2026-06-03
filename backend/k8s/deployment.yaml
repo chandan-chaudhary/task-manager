@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:  # <--  Metadata for the deployment
+  name: task-manager-api # <--  Name of the deployment
+  labels: # <--  Labels for the deployment
+    app: task-manager-api # <--  Labels for the deployment
+spec: # <--  Defines the desired state for the deployment
+  replicas: 2 # <--  Running 2 instances for high availability
+  selector: # <--  Points to the pods managed by this deployment
+    matchLabels: # <--  Selects the pods managed by this deployment
+      app: task-manager-api
+  template: # <--  Template for the pods
+    metadata: # <--  Metadata for the pods
+      labels: # <--  Labels for the pods
+        app: task-manager-api
+    spec: # <--  Defines the desired state for the pods
+      containers: # <--  Containers for the pods
+      - name: task-manager-api
+        image: debian476/backend-server:latest
+        imagePullPolicy: Always
+
+        ports:
+        - containerPort: 8080
+
+        envFrom:  # <--  Inject environment variables from secrets
+        - secretRef:
+            name: backend-secrets
+
+        env: # <--  Downward API to inject physical POD_NAME into app.ts
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+
+        livenessProbe: # <--  Auto-restarts container if app crashes/freezes
+          httpGet:
+            path: /api/health
+            port: 8080
+          initialDelaySeconds: 15
+          periodSeconds: 20
+
+        readinessProbe: # <--  Waits until container starts before sending traffic
+          httpGet:
+            path: /api/health
+            port: 8080
+          initialDelaySeconds: 5
+          periodSeconds: 10
+
+        resources: # <--  Resource limits to ensure stability
+          limits:
+            cpu: "500m"
+            memory: "512Mi"
+          requests:
+            cpu: "100m"
+            memory: "128Mi"
