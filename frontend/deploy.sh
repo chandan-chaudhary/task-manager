@@ -18,9 +18,9 @@ docker push $IMAGE
 
 # creat secret for images
 echo "Creating Kubernetes secret: frontend-secrets"
-kubectl delete secret frontend-secrets --ignore-not-found
 kubectl create secret generic frontend-secrets \
   --from-env-file=.env \
+  --dry-run=client -o yaml | kubectl apply -f -
 
 # apply the Kubernetes deployment and service
 echo "Applying Kubernetes deployment and service"
