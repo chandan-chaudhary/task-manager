@@ -2,43 +2,6 @@
 
 A robust RESTful API server for the Task Manager application built with Node.js, Express, TypeScript, Prisma ORM, and PostgreSQL. Features real-time notifications via Socket.io, JWT authentication, and clean layered architecture following industry best practices.
 
-FROM node:20-bullseye-slim
-
-# Create a non-root system user for safer runtime
-RUN addgroup --system app && adduser --system --ingroup app app
-
-# Run as non-root by default
-USER app
-
-# App root inside the container
-WORKDIR /app
-
-# Copy dependency manifests first to leverage Docker layer caching
-# --chown keeps ownership so non-root can read/write
-COPY --chown=app:app package*.json ./
-
-# Install deps as root if needed
-USER root
-
-RUN npm install --legacy-peer-deps
-
-# Ensure app user owns all files (incl. .next cache)
-RUN chown -R app:app /app
-
-# Switch back to non-root for runtime
-USER app
-
-# Copy source with correct ownership
-COPY --chown=app:app . .
-
-# Generate Prisma Client (types + runtime) for current schema
-RUN npx prisma generate
-
-# Dev server port
-EXPOSE 8080
-
-# Start the backend server
-CMD npm run dev
 ## Features
 
 - 🔐 **JWT Authentication** - Secure token-based auth with HTTP-only cookies
