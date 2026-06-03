@@ -31,7 +31,7 @@ app.use("/api/notifications", notificationRoutes);
 
 // Health check
 app.get("/api/health", (_, res) => {
-  res.status(200).json({ status: "OK", message: "Server is running" });
+  res.status(200).json({ status: "OK", message: "Server is running", pod: process.env.POD_NAME || "unknown" });
 });
 
 // Error handling middleware (must be last)
